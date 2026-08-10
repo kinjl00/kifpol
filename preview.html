@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>کیف‌پول من | مدیریت هزینه‌ها</title>
+<title>رویاچین | آرزوها و مدیریت هزینه‌ها</title>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
@@ -79,12 +79,33 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
 .card{padding:16px;margin-bottom:14px}
 .form-title{font-size:1rem;font-weight:800;margin-bottom:12px}
 label{display:block;font-size:.82rem;color:var(--muted);margin:10px 2px 6px}
-input[type=text],input:not([type]),textarea,select{
+input[type=text],input:not([type]),input[type=date],textarea,select{
   width:100%;background:rgba(10,10,26,.55);
   border:1px solid rgba(255,255,255,.16);border-radius:12px;
   padding:11px 12px;color:var(--text);font-family:inherit;font-size:.95rem;
   outline:none;transition:border .2s, box-shadow .2s;
 }
+input[type=date]{color-scheme:dark}
+input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7);cursor:pointer}
+.date-wrap{position:relative}
+.date-wrap .date-input{cursor:pointer;padding-left:40px;color:var(--text)}
+.date-caret{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:1rem;opacity:.85}
+.cal-box{position:fixed;z-index:95;width:min(90vw,332px);padding:14px}
+.cal-box.hidden{display:none}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-title{font-weight:800;font-size:.95rem}
+.cal-nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:var(--text);border-radius:9px;width:32px;height:32px;cursor:pointer;font-family:inherit;font-size:1rem;line-height:1;transition:.15s}
+.cal-nav:active{transform:scale(.94)}
+.cal-week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.cal-week div{font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:9px;font-size:.85rem;cursor:pointer;border:none;background:transparent;color:var(--text);font-family:inherit;transition:.12s}
+.cal-cell:hover{background:rgba(255,255,255,.12)}
+.cal-cell.other{color:var(--muted);opacity:.35}
+.cal-cell.friday{color:#ff8fab}
+.cal-cell.today{border:1px solid rgba(0,229,195,.65);color:#7dffe9;box-shadow:0 0 8px rgba(0,229,195,.3)}
+.cal-cell.sel{background:linear-gradient(135deg,#7c5cff,#00e5c3);color:#fff;font-weight:800;box-shadow:0 0 12px rgba(124,92,255,.5)}
+.cal-actions{display:flex;gap:8px;margin-top:12px}
 input:focus,textarea:focus,select:focus{
   border-color:rgba(124,92,255,.8);
   box-shadow:0 0 0 3px rgba(124,92,255,.22),0 0 16px rgba(124,92,255,.35);
@@ -147,6 +168,14 @@ textarea{resize:vertical;min-height:70px}
 .exp-name{font-weight:700;font-size:.95rem}
 .exp-note{font-size:.78rem;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .exp-meta{font-size:.7rem;color:var(--muted);margin-top:4px}
+.month-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 4px 6px;margin-top:6px;font-size:.92rem;font-weight:800;color:#7dffe9;text-shadow:0 0 12px rgba(0,229,195,.35);border-top:1px dashed rgba(255,255,255,.12);cursor:pointer;user-select:none}
+.month-head:first-child{border-top:none;margin-top:0}
+.month-head .mh-title{display:flex;align-items:center;gap:6px}
+.mh-caret{display:inline-block;transition:transform .2s;font-size:.75rem;color:var(--muted);width:16px;flex:none}
+.month-head.open .mh-caret{transform:rotate(90deg)}
+.month-sum{font-size:.78rem;color:var(--muted);font-weight:600}
+.month-body{overflow:hidden}
+.month-body.closed{display:none}
 .exp-side{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
 .exp-amt{font-weight:900;font-size:.98rem;white-space:nowrap}
 .exp-cat{font-size:.7rem;color:var(--muted)}
@@ -230,6 +259,22 @@ details.guide[open] summary::after{content:'▴'}
 .toast-in{background:rgba(16,16,40,.92);border:1px solid rgba(124,92,255,.55);border-radius:14px;padding:11px 18px;font-size:.85rem;box-shadow:0 0 24px rgba(124,92,255,.35)}
 .empty{text-align:center;color:var(--muted);padding:36px 0;font-size:.9rem}
 .footer{text-align:center;color:var(--muted);font-size:.72rem;padding:10px 0 4px}
+
+/* ---------- wish announcement banner (home) ---------- */
+.wish-announce{position:relative;padding:15px;margin-bottom:14px;overflow:hidden}
+.wish-announce .wa-title{display:flex;align-items:center;gap:8px;font-size:.95rem;font-weight:800;color:var(--gold);text-shadow:0 0 14px rgba(255,217,61,.5);margin-bottom:10px}
+.wa-glow{position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#ffd93d44,transparent 70%);filter:blur(40px);top:-40px;left:-40px;pointer-events:none}
+.wa-list{display:flex;flex-direction:column;gap:9px;position:relative;z-index:1}
+.wa-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:8px 10px}
+.wa-img{width:46px;height:46px;border-radius:11px;overflow:hidden;flex:none;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1px solid rgba(255,255,255,.12)}
+.wa-img img{width:100%;height:100%;object-fit:cover}
+.wa-main{flex:1;min-width:0}
+.wa-name{font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-bar{height:6px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden;margin:5px 0}
+.wa-fill{height:100%;border-radius:5px}
+.wa-left{font-size:.72rem;color:var(--muted)}
+.wa-left b{color:#ff8fab}
+.wa-pct{font-size:.78rem;font-weight:800;flex:none;color:#7dffe9;white-space:nowrap}
 </style>
 <style>@font-face{font-family:'Vazirmatn';src:local('Vazirmatn');}</style><script>window.__PREVIEW__=true;</script></head>
 <body>
@@ -245,14 +290,19 @@ details.guide[open] summary::after{content:'▴'}
 <div id="app">
   <header class="glass topbar">
     <div>
-      <div class="brand"><span class="logo">💰</span> کیف‌پول من</div>
-      <div class="sub">مدیریت هزینه‌ها و آرزوها</div>
+      <div class="brand"><span class="logo">🌙</span> رویاچین</div>
+      <div class="sub">آرزوهایت را جمع کن، خرج‌هایت را ثبت کن</div>
     </div>
   </header>
 
   <main>
     <!-- ===== تب ۱: ثبت خرج ===== -->
     <section id="tab-add" class="tab active">
+      <div class="glass wish-announce" id="wish-announce">
+        <div class="wa-glow"></div>
+        <div class="wa-title">🎯 آرزوها</div>
+        <div class="wa-list" id="wish-announce-list"></div>
+      </div>
       <div class="glass summary">
         <div class="sum-item">
           <div class="sum-label">کل خرج‌ها</div>
@@ -274,6 +324,11 @@ details.guide[open] summary::after{content:'▴'}
         <label>مبلغ (تومان)</label>
         <input type="text" id="exp-amount" inputmode="numeric" placeholder="مثلاً: ۱۲۰۰۰۰">
         <div class="quick-row" id="quick-row"></div>
+        <label>تاریخ خرج (شمسی — پیش‌فرض: امروز)</label>
+        <div class="date-wrap">
+          <input type="text" id="exp-date" class="date-input" readonly placeholder="انتخاب تاریخ شمسی">
+          <span class="date-caret">📅</span>
+        </div>
         <label>دسته‌بندی</label>
         <div class="cats" id="cats"></div>
         <label>کارت / منبع پرداخت</label>
@@ -361,6 +416,8 @@ details.guide[open] summary::after{content:'▴'}
         <div class="form-title">📱 پیامک بانکی</div>
         <div class="set-row"><span>🔍 تشخیص خودکار کلیپ‌بورد</span><label class="switch"><input type="checkbox" data-set="clipboardSms"><span class="slider"></span></label></div>
         <div class="set-row"><span>🔐 WebOTP — خواندن مستقیم کد پیامک (اندروید Chrome)</span><label class="switch"><input type="checkbox" data-set="webotp"><span class="slider"></span></label></div>
+        <div class="set-row"><span>⚡ باز کردن خودکار فرم ثبت خرج هنگام پیامک بانکی</span><label class="switch"><input type="checkbox" data-set="autoOpenSms"><span class="slider"></span></label></div>
+        <p class="hint" style="margin:8px 0 0">اگر روشن باشد، به محض تشخیص پیامک بانکی، اپ به‌صورت خودکار به فرم «ثبت خرج» در بالای صفحه می‌رود تا سریع ثبت کنی.</p>
       </div>
 
       <div class="glass card">
@@ -428,7 +485,7 @@ details.guide[open] summary::after{content:'▴'}
         <button class="btn-danger" id="reset-btn">پاک کردن همه داده‌ها</button>
       </div>
 
-      <div class="footer">کیف‌پول من — نسخه ۱.۰ • داده‌ها فقط روی همین دستگاه (LocalStorage) ذخیره می‌شود</div>
+      <div class="footer">رویاچین — نسخه ۱.۰ • داده‌ها فقط روی همین دستگاه (LocalStorage) ذخیره می‌شود</div>
     </section>
   </main>
 
@@ -448,6 +505,11 @@ details.guide[open] summary::after{content:'▴'}
     <input type="text" id="ed-name">
     <label>مبلغ (تومان)</label>
     <input type="text" id="ed-amount" inputmode="numeric">
+    <label>تاریخ (شمسی)</label>
+    <div class="date-wrap">
+      <input type="text" id="ed-date" class="date-input" readonly placeholder="انتخاب تاریخ شمسی">
+      <span class="date-caret">📅</span>
+    </div>
     <label>دسته‌بندی</label>
     <div class="cats" id="ed-cats"></div>
     <label>کارت / منبع</label>
@@ -458,6 +520,20 @@ details.guide[open] summary::after{content:'▴'}
       <button class="btn-ghost" id="ed-cancel">انصراف</button>
       <button class="btn-save" id="ed-save" style="width:auto;padding:10px 28px;margin-top:0">ذخیره</button>
     </div>
+  </div>
+</div>
+
+<div id="cal-box" class="glass cal-box hidden">
+  <div class="cal-head">
+    <button class="cal-nav" data-caldir="-1" type="button">‹</button>
+    <div class="cal-title"></div>
+    <button class="cal-nav" data-caldir="1" type="button">›</button>
+  </div>
+  <div class="cal-week"><div>ش</div><div>ی</div><div>د</div><div>س</div><div>چ</div><div>پ</div><div>ج</div></div>
+  <div class="cal-grid"></div>
+  <div class="cal-actions">
+    <button class="btn-ghost" id="cal-today" type="button" style="flex:1">امروز</button>
+    <button class="btn-ghost" id="cal-clear" type="button" style="flex:1">انصراف</button>
   </div>
 </div>
 
@@ -496,6 +572,190 @@ function faDateParts(ts){
     var d=new Date(ts); return {y:String(d.getFullYear()), m:String(d.getMonth()+1), d:String(d.getDate())};
   }
 }
+function _pad2(n){ return (n<10?'0':'')+n; }
+function faMonthLabel(y,m){
+  var MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+  return (MONTHS[Number(m)-1]||'')+' '+toFaDigits(y);
+}
+
+/* ---------- Jalali (Shamsi) conversion ---------- */
+function _div(a,b){ return ~~(a/b); }
+function _mod(a,b){ return a-~~(a/b)*b; }
+function _jalCal(jy){
+  var breaks=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];
+  var gy=jy+621, leapJ=-14, jp=breaks[0], jump=0, i, jm;
+  for(i=1;i<breaks.length;i++){
+    jm=breaks[i]; jump=jm-jp;
+    if(jy<jm) break;
+    leapJ=leapJ+_div(jump,33)*8+_div(_mod(jump,33),4);
+    jp=jm;
+  }
+  var n=jy-jp;
+  leapJ=leapJ+_div(n,33)*8+_div(_mod(n,33)+3,4);
+  if(_mod(jump,33)===4 && jump-n===4) leapJ++;
+  var leapG=_div(gy,4)-_div((_div(gy,100)+1)*3,4)-150;
+  var march=20+leapJ-leapG;
+  if(jump-n<6) n=n-jump+_div(jump+4,33)*33;
+  var leap=_mod(_mod(n+1,33)-1,4);
+  if(leap===-1) leap=4;
+  return {leap:leap, gy:gy, march:march};
+}
+function _g2d(gy,gm,gd){
+  var d=_div((gy+_div(gm-8,6)+100100)*1461,4)+_div(153*_mod(gm+9,12)+2,5)+gd-34840408;
+  d=d-_div(_div(gy+100100+_div(gm-8,6),100)*3,4)+752;
+  return d;
+}
+function _d2g(jdn){
+  var j=4*jdn+139361631;
+  j=j+_div(_div(4*jdn+183187720,146097)*3,4)*4-3908;
+  var i=_div(_mod(j,1461),4)*5+308;
+  var gd=_div(_mod(i,153),5)+1;
+  var gm=_mod(_div(i,153),12)+1;
+  var gy=_div(j,1461)-100100+_div(8-gm,6);
+  return {gy:gy, gm:gm, gd:gd};
+}
+function _j2d(jy,jm,jd){
+  var r=_jalCal(jy);
+  return _g2d(r.gy,3,r.march)+(jm-1)*31-_div(jm,7)*(jm-7)+jd-1;
+}
+function _d2j(jdn){
+  var gy=_d2g(jdn).gy, jy=gy-621, r=_jalCal(jy), jdn1f=_g2d(gy,3,r.march), k, jd, jm;
+  k=jdn-jdn1f;
+  if(k>=0){
+    if(k<=185){ jm=1+_div(k,31); jd=_mod(k,31)+1; return {jy:jy,jm:jm,jd:jd}; }
+    k-=186;
+  } else {
+    jy-=1; k+=179;
+    if(r.leap===1) k+=1;
+  }
+  jm=7+_div(k,30); jd=_mod(k,30)+1;
+  return {jy:jy, jm:jm, jd:jd};
+}
+function jalaaliToTs(jy,jm,jd){
+  var g=_d2g(_j2d(jy,jm,jd));
+  return new Date(g.gy, g.gm-1, g.gd, 12, 0, 0).getTime();
+}
+function tsToJalaali(ts){
+  var d=new Date(ts||Date.now());
+  return _d2j(_g2d(d.getFullYear(), d.getMonth()+1, d.getDate()));
+}
+function _jalLeap(jy){ return _jalCal(jy).leap===1; }
+function _jalDaysInMonth(jy,jm){
+  if(jm<=6) return 31;
+  if(jm<=11) return 30;
+  return _jalLeap(jy)?30:29;
+}
+function todayJalaliStr(){
+  var j=tsToJalaali(Date.now());
+  return j.jy+'/'+_pad2(j.jm)+'/'+_pad2(j.jd);
+}
+function tsToJalaliStr(ts){
+  var j=tsToJalaali(ts);
+  return j.jy+'/'+_pad2(j.jm)+'/'+_pad2(j.jd);
+}
+function jalaliStrToTs(s){
+  if(!s) return null;
+  var p=String(s).split('/');
+  if(p.length<3) return null;
+  var t=jalaaliToTs(Number(p[0]),Number(p[1]),Number(p[2]));
+  return isNaN(t) ? null : t;
+}
+
+/* ---------- Shamsi date picker ---------- */
+var JAL_MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+var JAL_WEEKDAYS=['ش','ی','د','س','چ','پ','ج'];
+var _calBox=null, _calInput=null, _calYear=0, _calMonth=0, _calSel='', _calCb=null;
+function _calClose(){
+  if(_calBox) _calBox.classList.add('hidden');
+  _calInput=null; _calCb=null;
+}
+function _calRender(){
+  var title=_calBox.querySelector('.cal-title');
+  title.textContent=JAL_MONTHS[_calMonth-1]+' '+toFaDigits(_calYear);
+  var first=new Date(jalaaliToTs(_calYear,_calMonth,1));
+  var offset=(first.getDay()+1)%7;
+  var dim=_jalDaysInMonth(_calYear,_calMonth);
+  var pm=_calMonth===1?12:_calMonth-1;
+  var py=_calMonth===1?_calYear-1:_calYear;
+  var pdim=_jalDaysInMonth(py,pm);
+  var nm=_calMonth===12?1:_calMonth+1;
+  var ny=_calMonth===12?_calYear+1:_calYear;
+  var today=tsToJalaali(Date.now());
+  var grid=_calBox.querySelector('.cal-grid');
+  var html='', d=1, idx, cell, cls;
+  for(idx=0; idx<42; idx++){
+    if(idx<offset){
+      cls='cal-cell other';
+      cell='<button class="'+cls+'" data-d="'+(pdim-offset+idx+1)+'" data-m="'+pm+'" data-y="'+py+'">'+toFaDigits(pdim-offset+idx+1)+'</button>';
+    } else if(idx>=offset+dim){
+      var nd=idx-offset-dim+1;
+      cell='<button class="cal-cell other" data-d="'+nd+'" data-m="'+nm+'" data-y="'+ny+'">'+toFaDigits(nd)+'</button>';
+    } else {
+      cls='cal-cell';
+      if((idx)%7===6) cls+=' friday';
+      if(today.jy===_calYear && today.jm===_calMonth && today.jd===d) cls+=' today';
+      if(_calSel===_calYear+'/'+_calMonth+'/'+d) cls+=' sel';
+      cell='<button class="'+cls+'" data-d="'+d+'" data-m="'+_calMonth+'" data-y="'+_calYear+'">'+toFaDigits(d)+'</button>';
+      d++;
+    }
+    html+=cell;
+  }
+  grid.innerHTML=html;
+}
+function _calNav(delta){
+  var m=_calMonth+delta, y=_calYear;
+  if(m<1){ m=12; y--; } else if(m>12){ m=1; y++; }
+  _calMonth=m; _calYear=y;
+  _calRender();
+}
+function openJalaliPicker(inputEl, initialStr, cb){
+  if(!_calBox) _calBox=document.getElementById('cal-box');
+  if(!_calBox || !inputEl) return;
+  var init=initialStr||todayJalaliStr();
+  var p=String(init).split('/');
+  _calYear=Number(p[0])||tsToJalaali(Date.now()).jy;
+  _calMonth=Math.min(12,Math.max(1,Number(p[1])||1));
+  _calSel=init;
+  _calCb=cb; _calInput=inputEl;
+  var rect=inputEl.getBoundingClientRect();
+  _calBox.classList.remove('hidden');
+  var bw=_calBox.offsetWidth;
+  var left=Math.max(8, Math.min(rect.left+rect.width-bw, window.innerWidth-bw-8));
+  var top=rect.bottom+8;
+  if(top+_calBox.offsetHeight>window.innerHeight-8){ top=Math.max(8, rect.top-_calBox.offsetHeight-8); }
+  _calBox.style.left=left+'px';
+  _calBox.style.top=top+'px';
+  _calRender();
+}
+
+/* ---------- date picker wiring ---------- */
+document.addEventListener('click', function(e){
+  var wrap=e.target.closest && e.target.closest('.date-wrap');
+  if(wrap){
+    var inp=wrap.querySelector('.date-input');
+    var cb=function(v){ inp.value=v; inp.dispatchEvent(new Event('change',{bubbles:true})); };
+    openJalaliPicker(inp, inp.value||'', cb);
+    return;
+  }
+  var day=e.target.closest && e.target.closest('.cal-cell');
+  if(day){
+    var v=(day.getAttribute('data-y'))+'/'+(day.getAttribute('data-m'))+'/'+(day.getAttribute('data-d'));
+    var cbv=_calCb; _calClose();
+    if(cbv) cbv(v);
+    return;
+  }
+  if(_calBox){
+    if(e.target.closest('.cal-nav')){
+      _calNav(Number(e.target.closest('.cal-nav').getAttribute('data-caldir')));
+      return;
+    }
+    if(e.target.closest('#cal-today')){ _calSel=todayJalaliStr(); _calRender(); return; }
+    if(e.target.closest('#cal-clear')||e.target.closest('#cal-close')){ _calClose(); return; }
+    if(_calInput && !_calBox.contains(e.target) && !e.target.closest('.date-wrap')) _calClose();
+  }
+});
+
+/* ---------- vib / toast ---------- */
 function vib(ms){ if(settings.vibration && navigator.vibrate){ try{ navigator.vibrate(ms); }catch(e){} } }
 var toastTimer=null;
 function toast(msg){
@@ -520,7 +780,7 @@ if(!cards || !Array.isArray(cards) || !cards.length){ cards=defaultCards(); save
 function saveCards(){ save(K_CARDS, cards); }
 function getCard(id){ for(var i=0;i<cards.length;i++){ if(cards[i].id===id) return cards[i]; } return null; }
 function genCardId(){ return 'c_'+Date.now()+'_'+Math.floor(Math.random()*9999); }
-var DEFAULTS={doubleTap:true, shake:true, vibration:true, clipboardSms:true, webotp:false, notify:false, notifyInterval:60, sync:false, syncRoom:'', lastSync:0};
+var DEFAULTS={doubleTap:true, shake:true, vibration:true, clipboardSms:true, webotp:false, autoOpenSms:true, notify:false, notifyInterval:60, sync:false, syncRoom:'', lastSync:0};
 Object.keys(DEFAULTS).forEach(function(k){ if(settings[k]===undefined) settings[k]=DEFAULTS[k]; });
 function persist(){ save(K_EXP, expenses); save(K_WISH, wishes); save(K_SET, settings); }
 
@@ -696,7 +956,16 @@ function fillFromSms(t){
   $('#exp-amount').value=r.amount;
   if(r.name) $('#exp-name').value=r.name;
   markQuick(-1);
+  if(settings.autoOpenSms) openExpenseForm();
   return true;
+}
+function openExpenseForm(){
+  if(!$('#tab-add').classList.contains('active')){
+    goTab('add');
+  }
+  window.scrollTo(0,0);
+  setTimeout(function(){ var f=$('#exp-amount'); if(f) f.focus(); },150);
+  vib(40);
 }
 function tryClipboard(){
   if(!settings.clipboardSms) return;
@@ -708,6 +977,7 @@ function tryClipboard(){
       $('#exp-amount').value=r.amount;
       if(r.name) $('#exp-name').value=r.name;
       toast('📱 پیامک بانکی از کلیپ‌بورد خوانده شد: '+fmt(r.amount)+' تومان');
+      if(settings.autoOpenSms) openExpenseForm();
     }
   }).catch(function(){ /* permission denied — ignore */ });
 }
@@ -772,6 +1042,7 @@ document.getElementById('cards-manage-list').addEventListener('click', function(
 /* ---------- submit expense ---------- */
 function resetExpenseForm(){
   $('#exp-name').value=''; $('#exp-amount').value=''; $('#exp-note').value=''; $('#sms-input').value='';
+  $('#exp-date').value=todayJalaliStr();
   markQuick(-1);
 }
 $('#exp-save').addEventListener('click', submitExpense);
@@ -789,7 +1060,8 @@ function submitExpense(){
   }
   var note=v($('#exp-note')).trim();
   if(!currentCard && cards.length) currentCard=cards[0].id;
-  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:Date.now(), m:Date.now()});
+  var expTs=jalaliStrToTs($('#exp-date').value)||Date.now();
+  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:expTs, m:Date.now()});
   persist();
   scheduleSync();
   renderAll();
@@ -805,6 +1077,14 @@ $('#sms-input').addEventListener('input', function(){
 
 /* ---------- expense list + edit + 3s delete ---------- */
 var pendingDel={}, delTicker=null;
+var expandedMonths={};
+function setDefaultExpandedMonths(){
+  expandedMonths={};
+  var t=faDateParts(Date.now());
+  expandedMonths[t.y+'/'+t.m]=true;
+  var prev=faDateParts(Date.now()-30*86400000);
+  expandedMonths[prev.y+'/'+prev.m]=true;
+}
 function tickPending(){
   if(!delTicker){
     delTicker=setInterval(function(){
@@ -844,6 +1124,29 @@ function doDelete(id, list){
   }
   persist(); scheduleSync(); renderAll(); vib(60);
 }
+function renderExpItem(e){
+  var c=getCat(e.cat);
+  var pending=!!pendingDel[e.id];
+  var delBtn = pending
+    ? '<button class="mini danger" data-del="'+e.id+'">تأیید حذف (۳)</button>'
+    : '<button class="mini" data-del="'+e.id+'">🗑️</button>';
+  return '<div class="exp-item glass">'
+    +'<div class="exp-ic" style="background:'+c.color+'26;color:'+c.color+'">'+c.icon+'</div>'
+    +'<div class="exp-main">'
+    +'<div class="exp-name">'+esc(e.name)+'</div>'
+    +(e.note?'<div class="exp-note">'+esc(e.note)+'</div>':'')
+    +'<div class="exp-meta">🗓️ '+faDate(e.ts)+' • '+faTime(e.ts)+'</div>'
+    +'</div>'
+    +'<div class="exp-side">'
+    +'<div class="exp-amt neon">'+fmt(e.amount)+'</div>'
+    +'<div class="exp-cat">'+c.label+' • '+(getCard(e.cardId)?esc(getCard(e.cardId).name):'—')+'</div>'
+    +'<div style="display:flex;align-items:center;gap:4px;margin-top:2px">'
+    +(getCard(e.cardId)?'<span class="cc-dot" style="width:8px;height:8px;border-radius:50%;background:'+getCard(e.cardId).color+';display:inline-block"></span><span style="font-size:.68rem;color:'+getCard(e.cardId).color+'">'+esc(getCard(e.cardId).name)+'</span>':'')
+    +'</div>'
+    +'<div class="exp-acts">'+delBtn+'<button class="mini" data-edit="'+e.id+'">✏️</button></div>'
+    +'</div>'
+    +'</div>';
+}
 function renderList(){
   var box=$('#exp-list');
   if(!expenses.length){
@@ -855,37 +1158,45 @@ function renderList(){
   $('#list-empty').style.display='none';
   var total=0; expenses.forEach(function(e){ total+=e.amount; });
   $('#list-count').textContent='تعداد: '+toFaDigits(expenses.length)+' خرج • مجموع: '+fmt(total)+' تومان';
+  var sorted=expenses.slice().sort(function(a,b){ return b.ts-a.ts; });
+  var groups={}, order=[];
+  sorted.forEach(function(e){
+    var p=faDateParts(e.ts), key=p.y+'/'+p.m;
+    if(!groups[key]){ groups[key]={sum:0, items:[]}; order.push(key); }
+    groups[key].sum+=e.amount;
+    groups[key].items.push(e);
+  });
+  order.sort(function(a,b){
+    var A=String(a).split('/'), B=String(b).split('/');
+    var cy=Number(A[0])-Number(B[0]);
+    return cy!==0 ? cy : Number(A[1])-Number(B[1]);
+  }).reverse();
   var html='';
-  expenses.slice().sort(function(a,b){ return b.ts-a.ts; }).forEach(function(e){
-    var c=getCat(e.cat);
-    var pending=!!pendingDel[e.id];
-    var delBtn = pending
-      ? '<button class="mini danger" data-del="'+e.id+'">تأیید حذف (۳)</button>'
-      : '<button class="mini" data-del="'+e.id+'">🗑️</button>';
-    html+='<div class="exp-item glass">'
-      +'<div class="exp-ic" style="background:'+c.color+'26;color:'+c.color+'">'+c.icon+'</div>'
-      +'<div class="exp-main">'
-      +'<div class="exp-name">'+esc(e.name)+'</div>'
-      +(e.note?'<div class="exp-note">'+esc(e.note)+'</div>':'')
-      +'<div class="exp-meta">🗓️ '+faDate(e.ts)+' • '+faTime(e.ts)+'</div>'
+  order.forEach(function(key){
+    var g=groups[key], parts=key.split('/');
+    var open=expandedMonths[key]===true;
+    html+='<div class="month-head'+(open?' open':'')+'" data-month="'+key+'">'
+      +'<span class="mh-title"><span class="mh-caret">▶</span>📅 '+faMonthLabel(parts[0],parts[1])+'</span>'
+      +'<span class="month-sum">'+fmt(g.sum)+' تومان • '+toFaDigits(g.items.length)+' خرج</span>'
       +'</div>'
-      +'<div class="exp-side">'
-      +'<div class="exp-amt neon">'+fmt(e.amount)+'</div>'
-      +'<div class="exp-cat">'+c.label+' • '+(getCard(e.cardId)?esc(getCard(e.cardId).name):'—')+'</div>'
-      +'<div style="display:flex;align-items:center;gap:4px;margin-top:2px">'
-      +(getCard(e.cardId)?'<span class="cc-dot" style="width:8px;height:8px;border-radius:50%;background:'+getCard(e.cardId).color+';display:inline-block"></span><span style="font-size:.68rem;color:'+getCard(e.cardId).color+'">'+esc(getCard(e.cardId).name)+'</span>':'')
-      +'</div>'
-      +'<div class="exp-acts">'+delBtn+'<button class="mini" data-edit="'+e.id+'">✏️</button></div>'
-      +'</div>'
-      +'</div>';
+      +'<div class="month-body'+(open?'':' closed')+'">';
+    g.items.forEach(function(e){ html+=renderExpItem(e); });
+    html+='</div>';
   });
   box.innerHTML=html;
 }
 $('#exp-list').addEventListener('click', function(e){
   var d=e.target.closest('[data-del]');
   var ed=e.target.closest('[data-edit]');
+  var mh=e.target.closest('[data-month]');
   if(d){ armDelete(d.getAttribute('data-del'),'exp'); return; }
-  if(ed){ openEdit(ed.getAttribute('data-edit')); }
+  if(ed){ openEdit(ed.getAttribute('data-edit')); return; }
+  if(mh){
+    var key=mh.getAttribute('data-month');
+    expandedMonths[key]= !(expandedMonths[key]!==false);
+    renderList();
+    return;
+  }
 });
 
 /* ---------- edit modal ---------- */
@@ -911,6 +1222,7 @@ function openEdit(id){
   $('#ed-name').value=e.name;
   $('#ed-amount').value=e.amount;
   $('#ed-note').value=e.note||'';
+  $('#ed-date').value=tsToJalaliStr(e.ts);
   renderEdCats();
   renderCardChips('ed-card-chips', edCard);
   $('#modal').classList.remove('hidden');
@@ -924,8 +1236,9 @@ $('#ed-save').addEventListener('click', function(){
   var raw=toEnDigits(v($('#ed-amount'))).replace(/[,٬، ]/g,'');
   var amount=parseFloat(raw);
   if(!amount || isNaN(amount) || amount<=0){ toast('⚠️ مبلغ را درست وارد کن'); return; }
+  var newTs=jalaliStrToTs($('#ed-date').value);
   expenses.forEach(function(x){
-    if(x.id===editId){ x.name=name; x.amount=amount; x.cat=edCat; x.cardId=edCard; x.note=v($('#ed-note')).trim(); x.m=Date.now(); }
+    if(x.id===editId){ x.name=name; x.amount=amount; x.cat=edCat; x.cardId=edCard; x.note=v($('#ed-note')).trim(); if(newTs) x.ts=newTs; x.m=Date.now(); }
   });
   persist(); scheduleSync(); renderAll(); vib(60);
   toast('✏️ خرج ویرایش شد');
@@ -969,6 +1282,37 @@ function submitWish(){
   wishImg=''; showWishPreview();
   $('#wish-form-title').textContent='➕ آرزوی جدید';
   persist(); scheduleSync(); renderWishes(); vib(80);
+}
+function renderWishAnnounce(){
+  var box=$('#wish-announce');
+  if(!box) return;
+  if(!wishes.length){
+    box.style.display='none';
+    return;
+  }
+  box.style.display='';
+  var list=$('#wish-announce-list');
+  var html='';
+  wishes.slice().sort(function(a,b){ return b.ts-a.ts; }).slice(0,3).forEach(function(w){
+    var pct=w.target>0?Math.min(100,Math.round(w.saved/w.target*100)):0;
+    var leftPct=Math.max(0,100-pct);
+    var left=Math.max(0, w.target-w.saved);
+    var color= pct>=100 ? '#ffd93d' : pct>70 ? '#22c55e' : pct>=40 ? '#eab308' : '#ef4444';
+    var done=w.target>0 && w.saved>=w.target;
+    var img= w.img
+      ? '<div class="wa-img"><img src="'+w.img+'" alt=""></div>'
+      : '<div class="wa-img">📷</div>';
+    html+='<div class="wa-row">'
+      +img
+      +'<div class="wa-main">'
+      +'<div class="wa-name">'+esc(w.name)+'</div>'
+      +'<div class="wa-bar"><div class="wa-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+color+','+color+'cc);box-shadow:0 0 8px '+color+'88"></div></div>'
+      +'<div class="wa-left">'+(done?'🎉 کامل شد!':'مونده: <b>'+fmt(left)+'</b> تومان')+'</div>'
+      +'</div>'
+      +'<div class="wa-pct">'+(done?'۱۰۰٪':toFaDigits(leftPct)+'٪ مونده')+'</div>'
+      +'</div>';
+  });
+  list.innerHTML=html;
 }
 var pendingWDel={};
 function renderWishes(){
@@ -1200,7 +1544,7 @@ function initNotify(){
   if(!settings.notify || !('Notification' in window) || Notification.permission!=='granted') return;
   notifyTimer=setInterval(function(){
     try{
-      new Notification('💸 یادآوری کیف‌پول من', {body:'وقتشه خرج‌هایت را ثبت کنی! 💰', icon:'/icon-192.png', tag:'kwp-reminder'});
+      new Notification('🌙 یادآوری رویاچین', {body:'وقتشه خرج‌هایت را ثبت کنی! 💰', icon:'/icon-192.png', tag:'kwp-reminder'});
     }catch(e){}
   }, (settings.notifyInterval||60)*60000);
 }
@@ -1451,9 +1795,12 @@ document.addEventListener('pointerdown', function(e){
 
 /* ---------- shake ---------- */
 var lastAcc={x:0,y:0,z:0}, shakeLast=0;
+var motionEnabled = window.DeviceMotionEvent ? true : false;
 if(window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission==='function'){
   document.addEventListener('pointerdown', function once(){
-    DeviceMotionEvent.requestPermission().then(function(r){ /* r === granted */ }).catch(function(){});
+    DeviceMotionEvent.requestPermission().then(function(r){
+      if(r!=='granted'){ toast('📳 برای شیک، اجازه‌ی «حرکت گوشی» را در تنظیمات مرورگر بده'); }
+    }).catch(function(){});
     document.removeEventListener('pointerdown', once);
   });
 }
@@ -1481,7 +1828,7 @@ if(false){
 }
 
 /* ---------- init ---------- */
-function renderAll(){ renderSummary(); renderList(); renderWishes(); renderStats(); renderAllCardChips(); }
+function renderAll(){ renderSummary(); renderList(); renderWishes(); renderWishAnnounce(); renderStats(); renderAllCardChips(); }
  // migrate old expenses without cardId
 (function migrateCards(){
   var changed=false;
@@ -1491,6 +1838,8 @@ function renderAll(){ renderSummary(); renderList(); renderWishes(); renderStats
 renderQuick();
 renderCats();
 renderCardChips('card-chips', currentCard);
+$('#exp-date').value=todayJalaliStr();
+setDefaultExpandedMonths();
 renderAll();
 renderSettings();
 updateSyncStatus();
