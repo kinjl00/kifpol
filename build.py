@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build script for کیف‌پول من (Wallet app).
+"""Build script for رویاچین (wish/wallet app).
 
 Produces:
   workers.js   — a single-file, self-contained worker script (Cloudflare Workers /
@@ -50,38 +50,80 @@ FONTFACE = (
 )
 app = app.replace("/*FONTFACE_PLACEHOLDER*/", FONTFACE)
 
-# ---------- 2) generate the app icon (neon wallet on dark background) ----------
+# ---------- 2) generate the app icon (dream moon & stars — matches "رویاچین") ----------
 try:
     from PIL import Image, ImageDraw
+    import math
 
     S = 512
-    img = Image.new("RGBA", (S, S), (10, 10, 26, 255))
+    img = Image.new("RGBA", (S, S), (8, 6, 26, 255))
     d = ImageDraw.Draw(img)
 
-    # soft glow behind the wallet
-    for radius, col in ((210, (124, 92, 255, 26)), (150, (0, 229, 195, 16))):
-        d.rounded_rectangle(
-            [S/2 - radius, S/2 - radius, S/2 + radius, S/2 + radius],
-            radius=radius,
-            fill=col,
-        )
+    # --- dreamy nebula glow background ---
+    cx, cy = S/2, S/2
+    for radius, col in ((300, (124, 92, 255, 40)), (215, (0, 229, 195, 28)),
+                        (150, (255, 217, 61, 20))):
+        d.ellipse([cx - radius, cy - radius, cx + radius, cy + radius],
+                  fill=col)
 
-    # wallet body
-    w_left, w_top, w_right, w_bottom = 96, 136, 416, 376
-    d.rounded_rectangle([w_left, w_top, w_right, w_bottom], radius=36,
-                        fill=(24, 24, 58, 255), outline=(124, 92, 255, 255), width=6)
+    # --- gradient-ish night backdrop (rounded square) ---
+    def draw_gradient(bbox, c1, c2):
+        x0, y0, x1, y1 = bbox
+        for y in range(int(y0), int(y1)):
+            t = (y - y0) / max(1, (y1 - y0))
+            col = (int(c1[0] + (c2[0]-c1[0])*t),
+                   int(c1[1] + (c2[1]-c1[1])*t),
+                   int(c1[2] + (c2[2]-c1[2])*t), 255)
+            d.line([x0, y, x1, y], fill=col)
+    draw_gradient((36, 36, 476, 476), (20, 16, 52), (12, 30, 66))
 
-    # card slot band
-    d.rounded_rectangle([w_left + 26, w_top + 32, w_right - 26, w_top + 96],
-                        radius=20, fill=(10, 10, 26, 255),
-                        outline=(0, 229, 195, 230), width=4)
+    # rounded mask to frame the gradient
+    mask = Image.new("L", (S, S), 0)
+    dm = ImageDraw.Draw(mask)
+    dm.rounded_rectangle([36, 36, 476, 476], radius=72, fill=255)
+    img.putalpha(mask)
 
-    # coin
-    cx, cy, cr = S/2, 256, 64
-    d.ellipse([cx - cr, cy - cr, cx + cr, cy + cr], fill=(255, 217, 61, 255))
-    d.ellipse([cx - cr + 10, cy - cr + 10, cx + cr - 10, cy + cr - 10],
-              outline=(168, 132, 20, 255), width=6)
-    d.ellipse([cx - 30, cy - 30, cx + 30, cy + 30], outline=(168, 132, 20, 200), width=5)
+    # --- stars (4-point sparkles) ---
+    def star(cx0, cy0, r, col, width=6):
+        n = 4
+        pts = []
+        for i in range(n * 2):
+            ang = math.pi * i / n - math.pi / 2
+            rad = r if i % 2 == 0 else r * 0.35
+            pts.append((cx0 + rad * math.cos(ang), cy0 + rad * math.sin(ang)))
+        d.polygon(pts, fill=col)
+        d.line([cx0 - r, cy0, cx0 + r, cy0], fill=col, width=width)
+        d.line([cx0, cy0 - r, cx0, cy0 + r], fill=col, width=width)
+
+    stars = [(392, 128, 26), (132, 180, 18), (396, 320, 16), (200, 356, 14),
+             (150, 96, 12), (430, 232, 12)]
+    for sx, sy, sr in stars:
+        star(sx, sy, sr, (255, 255, 255, 235))
+
+    # --- glowing crescent moon (the "dream") ---
+    moon_c = (256, 220)
+    R = 132
+    # outer glow rings
+    for rr, alpha in ((R + 42, 30), (R + 26, 50)):
+        d.ellipse([moon_c[0]-rr, moon_c[1]-rr, moon_c[0]+rr, moon_c[1]+rr],
+                  fill=(255, 217, 61, alpha))
+    # golden moon body
+    d.ellipse([moon_c[0]-R, moon_c[1]-R, moon_c[0]+R, moon_c[1]+R],
+              fill=(255, 217, 61, 255))
+    # crescent cut (offset darker disc)
+    d.ellipse([moon_c[0]-R+56, moon_c[1]-R-30, moon_c[0]+R+40, moon_c[1]+R-20],
+              fill=(16, 22, 58, 255))
+    # inner shading hint
+    d.ellipse([moon_c[0]-R+30, moon_c[1]-R+30, moon_c[0]+R-44, moon_c[1]+R-44],
+              outline=(214, 178, 40, 160), width=4)
+
+    # --- a small "dream catcher" / wishing coin tied to the moon ---
+    # tiny star inside the crescent opening
+    star(216, 300, 22, (0, 229, 195, 255), width=5)
+    # three dots as a falling-star trail
+    for dx, rr in ((286, 8), (314, 5), (336, 3)):
+        d.ellipse([286 + dx - rr, 350 - rr, 286 + dx + rr, 350 + rr],
+                  fill=(0, 229, 195, 255))
 
     buf = io.BytesIO()
     img.save(buf, format="PNG")
@@ -116,8 +158,8 @@ self.addEventListener('fetch',function(e){
 
 # ---------- 4) assemble the worker script ----------
 MANIFEST = json.dumps({
-    "name": "کیف‌پول من — مدیریت هزینه‌ها",
-    "short_name": "کیف‌پول من",
+    "name": "رویاچین — آرزوها و مدیریت هزینه‌ها",
+    "short_name": "رویاچین",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
@@ -131,7 +173,7 @@ MANIFEST = json.dumps({
     ],
 }, ensure_ascii=False)
 
-HEADER = "// کیف‌پول من — مدیریت هزینه‌ها و آرزوها (Persian RTL wallet app)\n" \
+HEADER = "// رویاچین — آرزوها و مدیریت هزینه‌ها (Persian RTL wish/wallet app)\n" \
          "// Single-file worker: Cloudflare Workers / Deno Deploy / Bun / Node\n" \
          "// Build date: " + __import__("datetime").date.today().isoformat() + "\n"
 def b64const(data):
