@@ -105,6 +105,16 @@ textarea{resize:vertical;min-height:70px}
 }
 .cat-chip .ci{font-size:1.3rem}
 .cat-chip.on{border-color:var(--cc);box-shadow:0 0 14px var(--cc);background:rgba(255,255,255,.1)}
+.card-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.card-chip{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:.18s;font-size:.8rem;color:var(--text);font-family:inherit}
+.card-chip .cc-dot{width:10px;height:10px;border-radius:50%;flex:none;box-shadow:0 0 8px currentColor}
+.card-chip.on{border-color:var(--cc);box-shadow:0 0 12px var(--cc);background:rgba(255,255,255,.1)}
+.card-chip.add-card{border-style:dashed;color:var(--muted)}
+.card-manage{display:flex;align-items:center;gap:8px;padding:10px 12px;margin-bottom:8px}
+.card-manage .cc-dot{width:12px;height:12px;border-radius:50%;flex:none}
+.card-manage-main{flex:1;min-width:0}
+.card-manage-name{font-weight:700;font-size:.9rem}
+.card-manage-meta{font-size:.72rem;color:var(--muted)}
 
 .btn-save{
   position:relative;overflow:hidden;display:block;width:100%;margin-top:16px;padding:13px;
@@ -266,6 +276,12 @@ details.guide[open] summary::after{content:'▴'}
         <div class="quick-row" id="quick-row"></div>
         <label>دسته‌بندی</label>
         <div class="cats" id="cats"></div>
+        <label>کارت / منبع پرداخت</label>
+        <div class="card-chips" id="card-chips"></div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input type="text" id="new-card-name" placeholder="نام کارت جدید (مثلاً: ملت، ملی، نقدی)" style="flex:1">
+          <button class="btn-ghost" id="add-card-btn">➕ افزودن</button>
+        </div>
         <label>یادداشت (اختیاری)</label>
         <input type="text" id="exp-note" placeholder="یادداشت کوتاه...">
         <button class="btn-save" id="exp-save">💾 ذخیره خرج</button>
@@ -324,6 +340,10 @@ details.guide[open] summary::after{content:'▴'}
         <div class="form-title">📈 هزینه بر اساس دسته‌بندی</div>
         <div id="cat-chart"></div>
       </div>
+      <div class="glass card">
+        <div class="form-title">💳 هزینه بر اساس کارت / منبع</div>
+        <div id="card-chart"></div>
+      </div>
     </section>
 
     <!-- ===== تب ۵: تنظیمات ===== -->
@@ -341,6 +361,17 @@ details.guide[open] summary::after{content:'▴'}
         <div class="form-title">📱 پیامک بانکی</div>
         <div class="set-row"><span>🔍 تشخیص خودکار کلیپ‌بورد</span><label class="switch"><input type="checkbox" data-set="clipboardSms"><span class="slider"></span></label></div>
         <div class="set-row"><span>🔐 WebOTP — خواندن مستقیم کد پیامک (اندروید Chrome)</span><label class="switch"><input type="checkbox" data-set="webotp"><span class="slider"></span></label></div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">💳 کارت‌ها و منابع پول</div>
+        <p class="hint" style="margin:0 0 10px">کارت‌هایت را اینجا تعریف کن — هنگام ثبت خرج می‌تونی انتخاب کنی پول از کدوم کارت کم شده. می‌تونی مثلاً «ملت»، «ملی»، «نقدی» بسازی.</p>
+        <div id="cards-manage-list"></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <input type="text" id="settings-new-card" placeholder="نام کارت جدید..." style="flex:1">
+          <button class="btn-ghost" id="settings-add-card">➕ افزودن کارت</button>
+        </div>
+        <p class="hint" style="margin:8px 0 0">💡 روی کارت در لیست مدیریت بزن تا رنگش عوض شود.</p>
       </div>
 
       <div class="glass card">
@@ -419,6 +450,8 @@ details.guide[open] summary::after{content:'▴'}
     <input type="text" id="ed-amount" inputmode="numeric">
     <label>دسته‌بندی</label>
     <div class="cats" id="ed-cats"></div>
+    <label>کارت / منبع</label>
+    <div class="card-chips" id="ed-card-chips"></div>
     <label>یادداشت</label>
     <input type="text" id="ed-note">
     <div class="modal-btns">
@@ -474,12 +507,19 @@ function toast(msg){
 }
 
 /* ---------- storage ---------- */
-var K_EXP='kwp_expenses', K_WISH='kwp_wishes', K_SET='kwp_settings';
+var K_EXP='kwp_expenses', K_WISH='kwp_wishes', K_SET='kwp_settings', K_CARDS='kwp_cards';
 function load(k,d){ try{ var x=localStorage.getItem(k); return x?JSON.parse(x):d; }catch(e){ return d; } }
 function save(k,val){ try{ localStorage.setItem(k, JSON.stringify(val)); }catch(e){} }
 var expenses = load(K_EXP, []);
 var wishes = load(K_WISH, []);
 var settings = load(K_SET, {});
+var CARD_COLORS=['#7c5cff','#00e5c3','#ff6b6b','#ffd93d','#4ecdc4','#ff8fab','#c084fc','#6bcbff','#22c55e','#eab308'];
+function defaultCards(){ return [{id:'c_'+Date.now(), name:'کارت اصلی', color:CARD_COLORS[0]}, {id:'c_'+(Date.now()+1), name:'نقدی', color:CARD_COLORS[1]}]; }
+var cards = load(K_CARDS, null);
+if(!cards || !Array.isArray(cards) || !cards.length){ cards=defaultCards(); save(K_CARDS, cards); }
+function saveCards(){ save(K_CARDS, cards); }
+function getCard(id){ for(var i=0;i<cards.length;i++){ if(cards[i].id===id) return cards[i]; } return null; }
+function genCardId(){ return 'c_'+Date.now()+'_'+Math.floor(Math.random()*9999); }
 var DEFAULTS={doubleTap:true, shake:true, vibration:true, clipboardSms:true, webotp:false, notify:false, notifyInterval:60, sync:false, syncRoom:'', lastSync:0};
 Object.keys(DEFAULTS).forEach(function(k){ if(settings[k]===undefined) settings[k]=DEFAULTS[k]; });
 function persist(){ save(K_EXP, expenses); save(K_WISH, wishes); save(K_SET, settings); }
@@ -495,6 +535,55 @@ var CATS=[
   {id:'other',     icon:'📦', label:'سایر',       color:'#a8b2c1'}
 ];
 function getCat(id){ for(var i=0;i<CATS.length;i++){ if(CATS[i].id===id) return CATS[i]; } return CATS[6]; }
+
+/* ---------- cards: selection & rendering ---------- */
+var currentCard = (cards[0] && cards[0].id) || '';
+var edCard = '';
+function renderCardChips(containerId, selectedId){
+  var box=document.getElementById(containerId);
+  if(!box) return;
+  var html2='';
+  cards.forEach(function(c){
+    var on=c.id===selectedId?' on':'';
+    html2+='<button class="card-chip'+on+'" data-card="'+c.id+'" style="--cc:'+c.color+';color:'+c.color+'">'
+      +'<span class="cc-dot" style="background:'+c.color+'"></span>'
+      +'<span>'+esc(c.name)+'</span></button>';
+  });
+  box.innerHTML=html2;
+}
+function renderAllCardChips(){
+  renderCardChips('card-chips', currentCard);
+  renderCardChips('ed-card-chips', edCard);
+  renderCardsManage();
+}
+function addCard(name){
+  name=(name||'').trim();
+  if(!name){ toast('⚠️ نام کارت را وارد کن'); return null; }
+  if(cards.some(function(c){ return c.name===name; })){ toast('⚠️ این کارت قبلاً اضافه شده'); return null; }
+  var col=CARD_COLORS[cards.length % CARD_COLORS.length];
+  var c={id:genCardId(), name:name, color:col};
+  cards.push(c);
+  saveCards();
+  toast('💳 کارت «'+name+'» اضافه شد');
+  renderAllCardChips();
+  scheduleSync();
+  return c;
+}
+function renderCardsManage(){
+  var box=document.getElementById('cards-manage-list');
+  if(!box) return;
+  if(!cards.length){ box.innerHTML='<div class="empty" style="padding:12px">هنوز کارتی نداری — یکی بساز ✨</div>'; return; }
+  var html2='';
+  cards.forEach(function(c){
+    var cnt=expenses.filter(function(e){ return e.cardId===c.id; }).length;
+    html2+='<div class="glass card-manage" data-manage-card="'+c.id+'" style="cursor:pointer" title="بزن تا رنگ عوض شود">'
+      +'<span class="cc-dot" style="background:'+c.color+'"></span>'
+      +'<div class="card-manage-main"><div class="card-manage-name">'+esc(c.name)+'</div><div class="card-manage-meta">'+toFaDigits(cnt)+' خرج • '+c.color+'</div></div>'
+      +'<button class="mini danger" data-del-card="'+c.id+'">🗑️ حذف</button>'
+      +'</div>';
+  });
+  box.innerHTML=html2;
+}
 
 /* ---------- canvas background: 60 particles + lines + touch repel ---------- */
 (function(){
@@ -659,6 +748,26 @@ $('#cats').addEventListener('click', function(e){
   currentCat=b.getAttribute('data-cat');
   renderCats();
 });
+$('#card-chips').addEventListener('click', function(e){
+  var b=e.target.closest('.card-chip'); if(!b) return;
+  currentCard=b.getAttribute('data-card');
+  renderCardChips('card-chips', currentCard);
+});
+$('#ed-card-chips').addEventListener('click', function(e){
+  var b=e.target.closest('.card-chip'); if(!b) return;
+  edCard=b.getAttribute('data-card');
+  renderCardChips('ed-card-chips', edCard);
+});
+$('#add-card-btn').addEventListener('click', function(){
+  var inp=$('#new-card-name'); var c=addCard(v(inp)); if(c){ inp.value=''; currentCard=c.id; renderCardChips('card-chips', currentCard); }
+});
+$('#new-card-name').addEventListener('keydown', function(e){ if(e.key==='Enter'){ var c=addCard(v(this)); if(c){ this.value=''; currentCard=c.id; renderCardChips('card-chips', currentCard); } } });
+$('#settings-add-card').addEventListener('click', function(){ var inp=$('#settings-new-card'); var c=addCard(v(inp)); if(c) inp.value=''; });
+$('#settings-new-card').addEventListener('keydown', function(e){ if(e.key==='Enter'){ var c=addCard(v(this)); if(c) this.value=''; } });
+document.getElementById('cards-manage-list').addEventListener('click', function(e){
+  var del=e.target.closest('[data-del-card]'); if(del){ e.stopPropagation(); var id=del.getAttribute('data-del-card'); if(cards.length<=1){ toast('⚠️ حداقل یک کارت باید بماند'); return; } var has=expenses.some(function(ex){ return ex.cardId===id; }); if(has){ toast('⚠️ این کارت در خرج‌ها استفاده شده — اول کارت خرج‌ها را عوض کن'); return; } tombs['c:'+id]=Date.now(); saveTombs(); cards=cards.filter(function(c){ return c.id!==id; }); if(currentCard===id) currentCard=cards[0].id; if(edCard===id) edCard=cards[0].id; saveCards(); renderAllCardChips(); scheduleSync(); toast('🗑️ کارت حذف شد'); return; }
+  var row=e.target.closest('[data-manage-card]'); if(row){ var id=row.getAttribute('data-manage-card'); var c=getCard(id); if(!c) return; var idx=CARD_COLORS.indexOf(c.color); c.color=CARD_COLORS[(idx+1)%CARD_COLORS.length]; c.m=Date.now(); saveCards(); renderAllCardChips(); scheduleSync(); }
+});
 
 /* ---------- submit expense ---------- */
 function resetExpenseForm(){
@@ -679,7 +788,8 @@ function submitExpense(){
     return;
   }
   var note=v($('#exp-note')).trim();
-  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, note:note, ts:Date.now(), m:Date.now()});
+  if(!currentCard && cards.length) currentCard=cards[0].id;
+  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:Date.now(), m:Date.now()});
   persist();
   scheduleSync();
   renderAll();
@@ -687,6 +797,7 @@ function submitExpense(){
   toast('✅ خرج ثبت شد: '+fmt(amount)+' تومان');
   resetExpenseForm();
   renderCats();
+  renderCardChips('card-chips', currentCard);
 }
 $('#sms-input').addEventListener('input', function(){
   if(fillFromSms(this.value)) toast('📱 مبلغ از پیامک تشخیص داده شد');
@@ -760,7 +871,10 @@ function renderList(){
       +'</div>'
       +'<div class="exp-side">'
       +'<div class="exp-amt neon">'+fmt(e.amount)+'</div>'
-      +'<div class="exp-cat">'+c.label+'</div>'
+      +'<div class="exp-cat">'+c.label+' • '+(getCard(e.cardId)?esc(getCard(e.cardId).name):'—')+'</div>'
+      +'<div style="display:flex;align-items:center;gap:4px;margin-top:2px">'
+      +(getCard(e.cardId)?'<span class="cc-dot" style="width:8px;height:8px;border-radius:50%;background:'+getCard(e.cardId).color+';display:inline-block"></span><span style="font-size:.68rem;color:'+getCard(e.cardId).color+'">'+esc(getCard(e.cardId).name)+'</span>':'')
+      +'</div>'
       +'<div class="exp-acts">'+delBtn+'<button class="mini" data-edit="'+e.id+'">✏️</button></div>'
       +'</div>'
       +'</div>';
@@ -793,11 +907,12 @@ function openEdit(id){
   var e=null;
   expenses.forEach(function(x){ if(x.id===id) e=x; });
   if(!e) return;
-  editId=id; edCat=e.cat;
+  editId=id; edCat=e.cat; edCard=e.cardId||currentCard||(cards[0]&&cards[0].id)||'';
   $('#ed-name').value=e.name;
   $('#ed-amount').value=e.amount;
   $('#ed-note').value=e.note||'';
   renderEdCats();
+  renderCardChips('ed-card-chips', edCard);
   $('#modal').classList.remove('hidden');
   setTimeout(function(){ $('#ed-name').focus(); }, 80);
 }
@@ -810,7 +925,7 @@ $('#ed-save').addEventListener('click', function(){
   var amount=parseFloat(raw);
   if(!amount || isNaN(amount) || amount<=0){ toast('⚠️ مبلغ را درست وارد کن'); return; }
   expenses.forEach(function(x){
-    if(x.id===editId){ x.name=name; x.amount=amount; x.cat=edCat; x.note=v($('#ed-note')).trim(); x.m=Date.now(); }
+    if(x.id===editId){ x.name=name; x.amount=amount; x.cat=edCat; x.cardId=edCard; x.note=v($('#ed-note')).trim(); x.m=Date.now(); }
   });
   persist(); scheduleSync(); renderAll(); vib(60);
   toast('✏️ خرج ویرایش شد');
@@ -884,6 +999,7 @@ function renderWishes(){
       +'<div class="bar-wrap"><div class="bar" style="width:'+pct+'%;background:linear-gradient(90deg,'+color+','+color+'cc);box-shadow:0 0 14px '+color+'88"></div></div>'
       +'<div class="wish-nums"><span>مونده: <span class="wish-left">'+fmt(left)+'</span> تومان</span></div>'
       +(done?'<div class="wish-done">🎉 تبریک! آماده خرید! ✨</div>':'')
+      +'<div class="wish-card-source" style="font-size:.75rem;color:var(--muted);margin-top:6px">منبع: '+(getCard(w.savedCard||w.cardId)||{name:'نامشخص'}).name+'</div>'
       +'<div class="deposit-row" style="display:none" data-deprow="'+w.id+'">'
       +'<input type="text" inputmode="numeric" placeholder="مبلغ واریز (تومان)">'
       +'<button class="mini ok" data-depok="'+w.id+'">واریز</button>'
@@ -987,6 +1103,27 @@ function renderStats(){
       +'</div></div>';
   });
   $('#cat-chart').innerHTML= any ? html : '<div class="empty">هنوز داده‌ای برای نمودار نیست 📊</div>';
+  // card chart
+  var cardBox=document.getElementById('card-chart');
+  if(cardBox){
+    var cardSums={}; cards.forEach(function(c){ cardSums[c.id]=0; });
+    expenses.forEach(function(e){ if(cardSums[e.cardId]!==undefined) cardSums[e.cardId]+=e.amount; else if(e.cardId) cardSums[e.cardId]=(cardSums[e.cardId]||0)+e.amount; });
+    var chHtml=''; var anyC=false;
+    cards.forEach(function(c){
+      var amt=cardSums[c.id]||0; if(amt<=0) return; anyC=true;
+      var pct=total>0?Math.round(amt/total*100):0;
+      chHtml+='<div class="chart-row">'
+        +'<div class="ch-ic" style="background:'+c.color+'26;color:'+c.color+'">💳</div>'
+        +'<div class="ch-main">'
+        +'<div class="ch-top"><span>'+esc(c.name)+'</span><span class="neon">'+fmt(amt)+' تومان • '+toFaDigits(pct)+'٪</span></div>'
+        +'<div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+c.color+','+c.color+'cc);box-shadow:0 0 10px '+c.color+'88"></div></div>'
+        +'</div></div>';
+    });
+    // include unknown card expenses
+    var unk=0; expenses.forEach(function(e){ if(!getCard(e.cardId)) unk+=e.amount; });
+    // unk already counted? ignore
+    cardBox.innerHTML= anyC ? chHtml : '<div class="empty" style="padding:12px">هنوز خرجی برای کارت‌ها نیست 💳</div>';
+  }
 }
 
 /* ---------- summary ---------- */
@@ -1107,6 +1244,7 @@ function localDoc(){
   var items={};
   expenses.forEach(function(e){ items['e:'+e.id]={t:'e', id:e.id, m:itemM(e), d:e}; });
   wishes.forEach(function(w){ items['w:'+w.id]={t:'w', id:w.id, m:itemM(w), d:w}; });
+  cards.forEach(function(c){ items['c:'+c.id]={t:'c', id:c.id, m:c.m||c.ts||0, d:c}; });
   Object.keys(tombs).forEach(function(k){
     var cur=items[k];
     if(!cur) items[k]={t:k.charAt(0), id:k.slice(2), del:true, m:tombs[k]};
@@ -1125,6 +1263,30 @@ function applyRemote(doc){
   var changed=false;
   Object.keys(doc.items).forEach(function(k){
     var r=doc.items[k];
+    if(r.t==='c'){
+      if(r.del){
+        for(var ci=0;ci<cards.length;ci++){
+          if(cards[ci].id===r.id && (cards[ci].m||0)<=r.m){
+            cards.splice(ci,1);
+            tombs[k]=Math.max(tombs[k]||0, r.m);
+            changed=true;
+            break;
+          }
+        }
+      } else {
+        var cf=false;
+        for(var cj=0;cj<cards.length;cj++){
+          if(cards[cj].id===r.id){
+            cf=true;
+            if((cards[cj].m||0) < (r.m||0)){ cards[cj]=r.d; changed=true; }
+            break;
+          }
+        }
+        if(!cf){ cards.push(r.d); changed=true; }
+      }
+      if(changed) saveCards();
+      return;
+    }
     var arr = r.t==='e' ? expenses : wishes;
     if(r.del){
       for(var i=0;i<arr.length;i++){
@@ -1319,9 +1481,16 @@ if(false){
 }
 
 /* ---------- init ---------- */
-function renderAll(){ renderSummary(); renderList(); renderWishes(); renderStats(); }
+function renderAll(){ renderSummary(); renderList(); renderWishes(); renderStats(); renderAllCardChips(); }
+ // migrate old expenses without cardId
+(function migrateCards(){
+  var changed=false;
+  expenses.forEach(function(e){ if(!e.cardId){ e.cardId=cards[0].id; changed=true; } });
+  if(changed) persist();
+})();
 renderQuick();
 renderCats();
+renderCardChips('card-chips', currentCard);
 renderAll();
 renderSettings();
 updateSyncStatus();
