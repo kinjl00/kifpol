@@ -282,6 +282,8 @@ details.guide[open] summary::after{content:'▴'}
           <input type="text" id="new-card-name" placeholder="نام کارت جدید (مثلاً: ملت، ملی، نقدی)" style="flex:1">
           <button class="btn-ghost" id="add-card-btn">➕ افزودن</button>
         </div>
+        <label>تاریخ</label>
+        <input type="date" id="exp-date">
         <label>یادداشت (اختیاری)</label>
         <input type="text" id="exp-note" placeholder="یادداشت کوتاه...">
         <button class="btn-save" id="exp-save">💾 ذخیره خرج</button>
@@ -300,6 +302,11 @@ details.guide[open] summary::after{content:'▴'}
     <!-- ===== تب ۲: لیست خرج‌ها ===== -->
     <section id="tab-list" class="tab">
       <h2 class="sec-title">📋 لیست خرج‌ها</h2>
+      <div class="glass card" style="padding:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <span style="font-size:.82rem;color:var(--muted)">🗓️ فیلتر ماه:</span>
+        <select id="filter-month" style="flex:1;min-width:140px"></select>
+        <button class="btn-ghost" id="filter-clear" style="padding:8px 12px;font-size:.78rem">همه</button>
+      </div>
       <div class="hint" id="list-count" style="margin:0 2px 10px"></div>
       <div id="exp-list"></div>
       <div id="list-empty" class="empty">هنوز خرجی ثبت نشده! ➕ از تب «ثبت» شروع کن</div>
@@ -343,6 +350,10 @@ details.guide[open] summary::after{content:'▴'}
       <div class="glass card">
         <div class="form-title">💳 هزینه بر اساس کارت / منبع</div>
         <div id="card-chart"></div>
+      </div>
+      <div class="glass card">
+        <div class="form-title">🗓️ هزینه بر اساس ماه (شمسی)</div>
+        <div id="month-chart"></div>
       </div>
     </section>
 
@@ -448,6 +459,8 @@ details.guide[open] summary::after{content:'▴'}
     <input type="text" id="ed-name">
     <label>مبلغ (تومان)</label>
     <input type="text" id="ed-amount" inputmode="numeric">
+    <label>تاریخ</label>
+    <input type="date" id="ed-date">
     <label>دسته‌بندی</label>
     <div class="cats" id="ed-cats"></div>
     <label>کارت / منبع</label>
@@ -496,6 +509,21 @@ function faDateParts(ts){
     var d=new Date(ts); return {y:String(d.getFullYear()), m:String(d.getMonth()+1), d:String(d.getDate())};
   }
 }
+function toDateInputValue(ts){
+  var d=new Date(ts); var y=d.getFullYear(), m=('0'+(d.getMonth()+1)).slice(-2), day=('0'+d.getDate()).slice(-2);
+  return y+'-'+m+'-'+day;
+}
+function fromDateInputValue(v){
+  if(!v) return Date.now();
+  var parts=v.split('-'); if(parts.length!==3) return Date.now();
+  var d=new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10), 12,0,0,0);
+  return d.getTime();
+}
+function faMonthName(persianMonthNum){
+  var names=['','فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+  return names[parseInt(persianMonthNum,10)]||persianMonthNum;
+}
+
 function vib(ms){ if(settings.vibration && navigator.vibrate){ try{ navigator.vibrate(ms); }catch(e){} } }
 var toastTimer=null;
 function toast(msg){
@@ -772,6 +800,7 @@ document.getElementById('cards-manage-list').addEventListener('click', function(
 /* ---------- submit expense ---------- */
 function resetExpenseForm(){
   $('#exp-name').value=''; $('#exp-amount').value=''; $('#exp-note').value=''; $('#sms-input').value='';
+  var dEl=$('#exp-date'); if(dEl) dEl.value=toDateInputValue(Date.now());
   markQuick(-1);
 }
 $('#exp-save').addEventListener('click', submitExpense);
@@ -788,8 +817,10 @@ function submitExpense(){
     return;
   }
   var note=v($('#exp-note')).trim();
+  var dateVal=v($('#exp-date')).trim();
+  var tsDate=dateVal?fromDateInputValue(dateVal):Date.now();
   if(!currentCard && cards.length) currentCard=cards[0].id;
-  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:Date.now(), m:Date.now()});
+  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:tsDate, m:Date.now()});
   persist();
   scheduleSync();
   renderAll();
@@ -844,8 +875,28 @@ function doDelete(id, list){
   }
   persist(); scheduleSync(); renderAll(); vib(60);
 }
+var filterMonth='';
+function buildMonthFilter(){
+  var sel=$('#filter-month'); if(!sel) return;
+  var months={};
+  expenses.forEach(function(e){ var pp=faDateParts(e.ts); var k=pp.y+'-'+('0'+pp.m).slice(-2); months[k]=true; });
+  var keys=Object.keys(months).sort().reverse();
+  var html='<option value="">همه ماه‌ها</option>';
+  keys.forEach(function(k){ var p=k.split('-'); var label=faMonthName(p[1])+' '+toFaDigits(p[0]); html+='<option value="'+k+'"'+(filterMonth===k?' selected':'')+'>'+label+'</option>'; });
+  sel.innerHTML=html;
+  sel.value=filterMonth;
+}
 function renderList(){
+  buildMonthFilter();
   var box=$('#exp-list');
+  var filtered=expenses.slice();
+  if(filterMonth){ filtered=filtered.filter(function(e){ var pp=faDateParts(e.ts); var k=pp.y+'-'+('0'+pp.m).slice(-2); return k===filterMonth; }); }
+  if(!filtered.length && expenses.length && filterMonth){
+    box.innerHTML='';
+    $('#list-empty').style.display='none';
+    $('#list-count').textContent='در '+faMonthName(filterMonth.split('-')[1])+' خرجی نیست';
+    return;
+  }
   if(!expenses.length){
     box.innerHTML='';
     $('#list-empty').style.display='block';
@@ -853,10 +904,11 @@ function renderList(){
     return;
   }
   $('#list-empty').style.display='none';
-  var total=0; expenses.forEach(function(e){ total+=e.amount; });
-  $('#list-count').textContent='تعداد: '+toFaDigits(expenses.length)+' خرج • مجموع: '+fmt(total)+' تومان';
+  var total=0; filtered.forEach(function(e){ total+=e.amount; });
+  if(filterMonth){ $('#list-count').textContent='تعداد: '+toFaDigits(filtered.length)+' خرج • مجموع: '+fmt(total)+' تومان — '+faMonthName(filterMonth.split('-')[1])+' '+toFaDigits(filterMonth.split('-')[0]); }
+  else { $('#list-count').textContent='تعداد: '+toFaDigits(expenses.length)+' خرج • مجموع: '+fmt(total)+' تومان'; }
   var html='';
-  expenses.slice().sort(function(a,b){ return b.ts-a.ts; }).forEach(function(e){
+  filtered.slice().sort(function(a,b){ return b.ts-a.ts; }).forEach(function(e){
     var c=getCat(e.cat);
     var pending=!!pendingDel[e.id];
     var delBtn = pending
@@ -911,6 +963,7 @@ function openEdit(id){
   $('#ed-name').value=e.name;
   $('#ed-amount').value=e.amount;
   $('#ed-note').value=e.note||'';
+  var edDateEl=$('#ed-date'); if(edDateEl) edDateEl.value=toDateInputValue(e.ts||Date.now());
   renderEdCats();
   renderCardChips('ed-card-chips', edCard);
   $('#modal').classList.remove('hidden');
@@ -924,8 +977,9 @@ $('#ed-save').addEventListener('click', function(){
   var raw=toEnDigits(v($('#ed-amount'))).replace(/[,٬، ]/g,'');
   var amount=parseFloat(raw);
   if(!amount || isNaN(amount) || amount<=0){ toast('⚠️ مبلغ را درست وارد کن'); return; }
+  var newTs=fromDateInputValue(v($('#ed-date')).trim());
   expenses.forEach(function(x){
-    if(x.id===editId){ x.name=name; x.amount=amount; x.cat=edCat; x.cardId=edCard; x.note=v($('#ed-note')).trim(); x.m=Date.now(); }
+    if(x.id===editId){ x.name=name; x.amount=amount; x.cat=edCat; x.cardId=edCard; x.note=v($('#ed-note')).trim(); x.ts=newTs; x.m=Date.now(); }
   });
   persist(); scheduleSync(); renderAll(); vib(60);
   toast('✏️ خرج ویرایش شد');
@@ -1123,6 +1177,35 @@ function renderStats(){
     var unk=0; expenses.forEach(function(e){ if(!getCard(e.cardId)) unk+=e.amount; });
     // unk already counted? ignore
     cardBox.innerHTML= anyC ? chHtml : '<div class="empty" style="padding:12px">هنوز خرجی برای کارت‌ها نیست 💳</div>';
+  }
+  // month chart (persian months)
+  var monthBox=document.getElementById('month-chart');
+  if(monthBox){
+    var monthSums={};
+    expenses.forEach(function(e){
+      var pp=faDateParts(e.ts);
+      var key=pp.y+'-'+('0'+pp.m).slice(-2);
+      monthSums[key]=(monthSums[key]||0)+e.amount;
+    });
+    var keys=Object.keys(monthSums).sort();
+    if(!keys.length){ monthBox.innerHTML='<div class="empty" style="padding:12px">هنوز خرجی ثبت نشده</div>'; }
+    else {
+      var maxAmt=Math.max.apply(null, keys.map(function(k){ return monthSums[k]; }));
+      var htm='';
+      // show last 6 months sorted desc
+      keys.slice(-8).reverse().forEach(function(k){
+        var parts=k.split('-'); var y=parts[0], m=parts[1];
+        var label=faMonthName(m)+' '+toFaDigits(y);
+        var amt=monthSums[k]; var pct=maxAmt>0?Math.round(amt/maxAmt*100):0;
+        htm+='<div class="chart-row">'
+          +'<div class="ch-ic" style="background:rgba(124,92,255,.18);color:#a78bfa">🗓️</div>'
+          +'<div class="ch-main">'
+          +'<div class="ch-top"><span>'+label+'</span><span class="neon">'+fmt(amt)+' تومان</span></div>'
+          +'<div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%;background:linear-gradient(90deg,#7c5cff,#00e5c3);box-shadow:0 0 10px rgba(124,92,255,.5)"></div></div>'
+          +'</div></div>';
+      });
+      monthBox.innerHTML=htm;
+    }
   }
 }
 
@@ -1491,6 +1574,9 @@ function renderAll(){ renderSummary(); renderList(); renderWishes(); renderStats
 renderQuick();
 renderCats();
 renderCardChips('card-chips', currentCard);
+var fSel=document.getElementById('filter-month'); if(fSel) fSel.addEventListener('change', function(){ filterMonth=this.value; renderList(); });
+var fClear=document.getElementById('filter-clear'); if(fClear) fClear.addEventListener('click', function(){ filterMonth=''; var s=$('#filter-month'); if(s) s.value=''; renderList(); });
+var expDateEl=document.getElementById('exp-date'); if(expDateEl) expDateEl.value=toDateInputValue(Date.now());
 renderAll();
 renderSettings();
 updateSyncStatus();
