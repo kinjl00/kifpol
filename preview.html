@@ -275,6 +275,83 @@ details.guide[open] summary::after{content:'▴'}
 .wa-left{font-size:.72rem;color:var(--muted)}
 .wa-left b{color:#ff8fab}
 .wa-pct{font-size:.78rem;font-weight:800;flex:none;color:#7dffe9;white-space:nowrap}
+
+/* ---------- reminders banner (home) ---------- */
+.rem-banner{position:relative;padding:14px 15px;margin-bottom:14px;overflow:hidden;border-color:rgba(255,217,61,.32)}
+.rem-banner[style*="display:none"]{display:none!important}
+.rem-title{display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:800;color:var(--gold);text-shadow:0 0 12px rgba(255,217,61,.45);margin-bottom:10px}
+.rem-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:8px 10px;margin-bottom:8px}
+.rem-row:last-child{margin-bottom:0}
+.rem-row.rem-overdue{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.1)}
+.rem-main{flex:1;min-width:0}
+.rem-name{font-weight:700;font-size:.85rem}
+.rem-sub{font-size:.72rem;color:var(--muted);margin-top:2px}
+.rem-overdue .rem-name{color:#ffb3b3}
+.rem-side{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-size:.78rem;font-weight:700;color:var(--gold);white-space:nowrap}
+.rem-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.rem-manage-row{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px}
+.rem-manage-row.paid{opacity:.55}
+.rem-manage-main{flex:1;min-width:0}
+.rem-manage-name{font-weight:700;font-size:.88rem}
+.rem-manage-meta{font-size:.72rem;color:var(--muted);margin-top:2px}
+.rem-tag{font-size:.68rem;padding:2px 8px;border-radius:8px;background:rgba(124,92,255,.2);color:#b9a8ff;border:1px solid rgba(124,92,255,.4)}
+.rem-tag.bill{background:rgba(0,229,195,.16);color:#7dffe9;border-color:rgba(0,229,195,.4)}
+
+/* ---------- invoice scan ---------- */
+.scan-box{display:flex;flex-direction:column}
+.scan-preview{width:100%;max-height:280px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.scan-preview img{width:100%;height:100%;object-fit:contain}
+.ocr-prog{margin-top:10px;font-size:.8rem;color:var(--neon2);text-align:center;min-height:1.2em}
+
+/* ---------- wish ETA + soon badge ---------- */
+.wish-eta{font-size:.74rem;color:var(--muted);margin-top:6px;line-height:1.7;background:rgba(124,92,255,.1);border:1px dashed rgba(124,92,255,.3);border-radius:10px;padding:6px 9px}
+.wish-eta b{color:#b9a8ff}
+.wish-soon{margin-top:7px;font-weight:800;color:var(--gold);text-shadow:0 0 12px rgba(255,217,61,.6);font-size:.82rem;background:rgba(255,217,61,.12);border:1px solid rgba(255,217,61,.35);border-radius:10px;padding:5px 9px;text-align:center;animation:pulse 1.4s infinite}
+
+/* ---------- unusual expense alert ---------- */
+.alert-card{padding:14px 15px;margin-bottom:14px;border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08)}
+.alert-card[style*="display:none"]{display:none!important}
+.alert-title{font-weight:800;color:#ffb3b3;font-size:.92rem;margin-bottom:10px;text-shadow:0 0 10px rgba(239,68,68,.4)}
+.alert-row{display:flex;align-items:center;gap:8px;justify-content:space-between;font-size:.82rem;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+.alert-row:last-child{border-bottom:none}
+.alert-amt{font-weight:800;color:#ff8fab;white-space:nowrap}
+.alert-sub{font-size:.7rem;color:var(--muted);flex:1;text-align:center}
+
+/* ---------- game / gamification ---------- */
+.lvl-card{padding:16px}
+.lvl-head{display:flex;align-items:center;gap:14px}
+.lvl-ic{width:62px;height:62px;border-radius:18px;flex:none;display:flex;align-items:center;justify-content:center;font-size:2rem;background:linear-gradient(135deg,rgba(124,92,255,.3),rgba(0,229,195,.25));border:1px solid rgba(124,92,255,.4);box-shadow:0 0 18px rgba(124,92,255,.3)}
+.lvl-main{flex:1;min-width:0}
+.lvl-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.lvl-label{font-size:.78rem;color:var(--muted)}
+.lvl-num{font-size:1.5rem;font-weight:900;color:#fff;text-shadow:0 0 12px rgba(0,229,195,.7)}
+.lvl-title{font-size:.9rem;font-weight:800;color:var(--gold);text-shadow:0 0 10px rgba(255,217,61,.5);margin-right:auto}
+.lvl-xpbar{height:12px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden}
+.lvl-xpfill{height:100%;border-radius:8px;background:linear-gradient(90deg,#7c5cff,#00e5c3);box-shadow:0 0 12px rgba(124,92,255,.6);transition:width .6s ease}
+.lvl-meta{font-size:.74rem;color:var(--muted);margin-top:7px;line-height:1.8}
+.motiv-card{padding:14px 16px;border-color:rgba(0,229,195,.3)}
+.motiv-label{font-size:.78rem;color:var(--neon2);margin-bottom:6px;font-weight:700}
+.motiv{font-size:.92rem;line-height:2;font-weight:700;color:#fff}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.ach{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);text-align:center}
+.ach.locked{opacity:.42;filter:grayscale(.6)}
+.ach-ic{font-size:1.6rem}
+.ach-name{font-size:.74rem;font-weight:700;line-height:1.3}
+.ach-xp{font-size:.66rem;color:var(--muted)}
+.ch-card{padding:14px;margin-bottom:12px}
+.ch-card.done{border-color:rgba(34,197,94,.45)}
+.ch-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ch-ic{font-size:1.3rem}
+.ch-name{font-weight:800;font-size:.92rem;flex:1;min-width:0}
+.ch-prog{font-size:.78rem;font-weight:800;color:var(--neon2);white-space:nowrap}
+.ch-desc{font-size:.78rem;color:var(--muted);line-height:1.8;margin-bottom:8px}
+.ch-bar{height:10px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:9px}
+.ch-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#7c5cff,#00e5c3);box-shadow:0 0 10px rgba(124,92,255,.5);transition:width .5s}
+.ch-days{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.ch-day{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--muted)}
+.ch-day.done{background:linear-gradient(135deg,#22c55e,#00e5c3);color:#03150f;border-color:transparent;box-shadow:0 0 10px rgba(34,197,94,.5)}
+.ch-day.today{border-color:var(--gold);color:var(--gold);box-shadow:0 0 10px rgba(255,217,61,.5)}
+.ch-acts{display:flex;gap:8px;flex-wrap:wrap}
 </style>
 <style>@font-face{font-family:'Vazirmatn';src:local('Vazirmatn');}</style><script>window.__PREVIEW__=true;</script></head>
 <body>
@@ -302,6 +379,10 @@ details.guide[open] summary::after{content:'▴'}
         <div class="wa-glow"></div>
         <div class="wa-title">🎯 آرزوها</div>
         <div class="wa-list" id="wish-announce-list"></div>
+      </div>
+      <div class="glass rem-banner" id="rem-banner" style="display:none">
+        <div class="rem-title">⏰ یادآورهای نزدیک</div>
+        <div id="rem-banner-list"></div>
       </div>
       <div class="glass summary">
         <div class="sum-item">
@@ -349,6 +430,37 @@ details.guide[open] summary::after{content:'▴'}
           (ریال به تومان تبدیل می‌شود). اگر هنگام باز شدن اپ پیامکی کپی کرده باشی، خودکار پر می‌شود.
         </p>
         <textarea id="sms-input" rows="3" placeholder="مثلاً: مبلغ ۱٬۵۰۰٬۰۰۰ ریال بابت خرید از فروشگاه کسر گردید..."></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn-ghost" id="sms-autoreg" style="flex:1">⚡ ثبت خودکار تراکنش</button>
+          <button class="btn-ghost" id="sms-fill" style="flex:1">✍️ پر کردن فرم</button>
+        </div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">📷 اسکن فاکتور با دوربین</div>
+        <p class="hint" style="margin:0 0 8px">
+          عکس فاکتور را با دوربین بگیر یا از گالری انتخاب کن — مبلغ و کالا به‌صورت خودکار با OCR استخراج می‌شود.
+          سپس می‌تونی بررسی کنی و به‌عنوان خرج ثبت کنی. (OCR نیاز به اینترنت دارد؛ آفلاین می‌تونی دستی وارد کنی.)
+        </p>
+        <div class="scan-box">
+          <div class="scan-preview" id="invoice-preview" style="display:none"></div>
+          <button class="btn-ghost" id="invoice-snap-btn">📷 گرفتن عکس / انتخاب فایل</button>
+          <input type="file" id="invoice-file" accept="image/*" capture="environment" hidden>
+        </div>
+        <div id="invoice-ocr" style="display:none;margin-top:10px">
+          <button class="btn-save" id="invoice-ocr-btn" style="margin-top:0">🔍 استخراج مبلغ و کالا</button>
+          <div class="ocr-prog" id="ocr-prog" style="display:none"></div>
+        </div>
+        <div id="invoice-result" style="display:none;margin-top:10px">
+          <label>کالا / عنوان</label>
+          <input type="text" id="inv-item" placeholder="مثلاً: لباس، سوپرمارکت، ناهار">
+          <label>مبلغ (تومان)</label>
+          <input type="text" id="inv-amount" inputmode="numeric" placeholder="مثلاً: ۳۵۰۰۰۰">
+          <label>یادداشت (اختیاری)</label>
+          <input type="text" id="inv-note" placeholder="یادداشت...">
+          <div class="hint" style="margin:6px 0">دسته‌بندی از فرم بالا استفاده می‌شود. کارت هم از فرم بالا.</div>
+          <button class="btn-save" id="inv-save" style="margin-top:0">💾 ثبت به‌عنوان خرج</button>
+        </div>
       </div>
     </section>
 
@@ -385,6 +497,9 @@ details.guide[open] summary::after{content:'▴'}
     <!-- ===== تب ۴: آمار ===== -->
     <section id="tab-stats" class="tab">
       <h2 class="sec-title">📊 آمار</h2>
+      <div class="glass alert-card" id="unusual-alert" style="display:none">
+        <div id="unusual-alert-body"></div>
+      </div>
       <div class="stat-grid">
         <div class="glass stat-card"><div class="stat-label">خرج امروز</div><div class="stat-val neon2" id="st-today">۰</div><div class="sum-sub">تومان</div></div>
         <div class="glass stat-card"><div class="stat-label">خرج این هفته</div><div class="stat-val neon" id="st-week">۰</div><div class="sum-sub">تومان</div></div>
@@ -398,6 +513,41 @@ details.guide[open] summary::after{content:'▴'}
       <div class="glass card">
         <div class="form-title">💳 هزینه بر اساس کارت / منبع</div>
         <div id="card-chart"></div>
+      </div>
+    </section>
+
+    <!-- ===== تب: انگیزه و چالش ===== -->
+    <section id="tab-game" class="tab">
+      <h2 class="sec-title">🎮 انگیزه و چالش</h2>
+      <div class="glass card lvl-card">
+        <div class="lvl-head">
+          <div class="lvl-ic" id="game-level-icon">🌱</div>
+          <div class="lvl-main">
+            <div class="lvl-row">
+              <span class="lvl-label">سطح</span>
+              <span class="lvl-num" id="game-level">۱</span>
+              <span class="lvl-title" id="game-title">تازه‌کار</span>
+            </div>
+            <div class="lvl-xpbar"><div class="lvl-xpfill" id="game-xpbar" style="width:0%"></div></div>
+            <div class="lvl-meta"><span id="game-xp">۰ / ۱۰۰ XP</span> • کل: <span id="game-totalxp">۰</span> XP • 🔥 زنجیره: <span id="game-streak">۰</span> روز</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass card motiv-card">
+        <div class="motiv-label">💬 انگیزه امروز</div>
+        <div class="motiv" id="motiv">—</div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">🏅 مدال‌ها و دستاوردها</div>
+        <div class="ach-grid" id="ach-grid"></div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">🎯 چالش‌های مالی</div>
+        <p class="hint" style="margin:0 0 12px">چالش رو شروع کن و هر روز با «ثبت امروز» علامت بزن. با تکمیل هر چالش XP و مدال می‌گیری.</p>
+        <div id="ch-list"></div>
       </div>
     </section>
 
@@ -464,6 +614,34 @@ details.guide[open] summary::after{content:'▴'}
         <p class="hint" id="notify-status" style="margin:8px 0 0"></p>
       </div>
 
+      <div class="glass card">
+        <div class="form-title">🤖 اعلان‌های هوشمند</div>
+        <div class="set-row"><span>⚡ ثبت خودکار تراکنش از پیامک</span><label class="switch"><input type="checkbox" data-set="autoRegisterSms"><span class="slider"></span></label></div>
+        <div class="set-row"><span>💸 اعلان ثبت پرداخت / واریز</span><label class="switch"><input type="checkbox" data-set="notifyPayment"><span class="slider"></span></label></div>
+        <div class="set-row"><span>🎯 اعلان نزدیک شدن به هدف آرزو</span><label class="switch"><input type="checkbox" data-set="notifyGoal"><span class="slider"></span></label></div>
+        <div class="set-row"><span>⚠️ اعلان خرج غیرعادی</span><label class="switch"><input type="checkbox" data-set="notifyUnusual"><span class="slider"></span></label></div>
+        <div class="set-row"><span>⏰ اعلان سررسید قسط / قبض</span><label class="switch"><input type="checkbox" data-set="notifyBillDue"><span class="slider"></span></label></div>
+        <div class="set-row" style="align-items:center"><span>💰 پس‌انداز ماهانه (برای پیشنهاد زمان آرزو)</span><input type="text" id="monthly-saving" inputmode="numeric" style="width:130px" placeholder="۵۰۰۰۰۰"></div>
+        <div class="set-row"><span>🎮 فعال‌سازی تب انگیزه و چالش</span><label class="switch"><input type="checkbox" data-set="game"><span class="slider"></span></label></div>
+        <p class="hint" style="margin:8px 0 0">برای دریافت اعلان‌ها، اجازه‌ی نوتیفیکیشن را هم در کارت بالا (یادآوری ثبت خرج) بده.</p>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">⏰ یادآور قسط و قبض</div>
+        <p class="hint" style="margin:0 0 10px">قسط‌ها و قبض‌های دوره‌ای را اضافه کن تا سررسیدش یادت بمونه و در صفحه‌ی اصلی و با اعلان بهت یادآوری بشه.</p>
+        <div id="rem-manage-list"></div>
+        <div class="rem-form">
+          <input type="text" id="rem-title" placeholder="عنوان (مثلاً: قسط وام، قبض برق)">
+          <div style="display:flex;gap:8px">
+            <input type="text" id="rem-amount" inputmode="numeric" placeholder="مبلغ (تومان)" style="flex:1">
+            <select id="rem-type" style="width:auto"><option value="bill">قبض</option><option value="installment">قسط</option></select>
+          </div>
+          <div class="date-wrap"><input type="text" id="rem-due" class="date-input" readonly placeholder="تاریخ سررسید (شمسی)"><span class="date-caret">📅</span></div>
+          <select id="rem-repeat"><option value="none">یک‌بار</option><option value="weekly">هفتگی</option><option value="monthly">ماهانه</option><option value="yearly">سالانه</option></select>
+          <button class="btn-save" id="rem-add" style="margin-top:10px">➕ افزودن یادآور</button>
+        </div>
+      </div>
+
       <details class="glass guide">
         <summary>📲 راهنمای نصب روی گوشی</summary>
         <div class="guide-body">
@@ -485,7 +663,7 @@ details.guide[open] summary::after{content:'▴'}
         <button class="btn-danger" id="reset-btn">پاک کردن همه داده‌ها</button>
       </div>
 
-      <div class="footer">رویاچین — نسخه ۱.۰ • داده‌ها فقط روی همین دستگاه (LocalStorage) ذخیره می‌شود</div>
+      <div class="footer">رویاچین — نسخه ۱.۱ • داده‌ها روی همین دستگاه (LocalStorage) و قابل همگام‌سازی ابری</div>
     </section>
   </main>
 
@@ -494,6 +672,7 @@ details.guide[open] summary::after{content:'▴'}
     <button class="nav-btn" data-tab="list"><span class="nav-ic">📋</span><span>لیست</span></button>
     <button class="nav-btn" data-tab="wish"><span class="nav-ic">🎯</span><span>آرزوها</span></button>
     <button class="nav-btn" data-tab="stats"><span class="nav-ic">📊</span><span>آمار</span></button>
+    <button class="nav-btn" data-tab="game" id="nav-game"><span class="nav-ic">🎮</span><span>انگیزه</span></button>
     <button class="nav-btn" data-tab="settings"><span class="nav-ic">⚙️</span><span>تنظیمات</span></button>
   </nav>
 </div>
@@ -767,12 +946,13 @@ function toast(msg){
 }
 
 /* ---------- storage ---------- */
-var K_EXP='kwp_expenses', K_WISH='kwp_wishes', K_SET='kwp_settings', K_CARDS='kwp_cards';
+var K_EXP='kwp_expenses', K_WISH='kwp_wishes', K_SET='kwp_settings', K_CARDS='kwp_cards', K_REM='kwp_reminders', K_GAME='kwp_game';
 function load(k,d){ try{ var x=localStorage.getItem(k); return x?JSON.parse(x):d; }catch(e){ return d; } }
 function save(k,val){ try{ localStorage.setItem(k, JSON.stringify(val)); }catch(e){} }
 var expenses = load(K_EXP, []);
 var wishes = load(K_WISH, []);
 var settings = load(K_SET, {});
+var reminders = load(K_REM, []);
 var CARD_COLORS=['#7c5cff','#00e5c3','#ff6b6b','#ffd93d','#4ecdc4','#ff8fab','#c084fc','#6bcbff','#22c55e','#eab308'];
 function defaultCards(){ return [{id:'c_'+Date.now(), name:'کارت اصلی', color:CARD_COLORS[0]}, {id:'c_'+(Date.now()+1), name:'نقدی', color:CARD_COLORS[1]}]; }
 var cards = load(K_CARDS, null);
@@ -780,9 +960,17 @@ if(!cards || !Array.isArray(cards) || !cards.length){ cards=defaultCards(); save
 function saveCards(){ save(K_CARDS, cards); }
 function getCard(id){ for(var i=0;i<cards.length;i++){ if(cards[i].id===id) return cards[i]; } return null; }
 function genCardId(){ return 'c_'+Date.now()+'_'+Math.floor(Math.random()*9999); }
-var DEFAULTS={doubleTap:true, shake:true, vibration:true, clipboardSms:true, webotp:false, autoOpenSms:true, notify:false, notifyInterval:60, sync:false, syncRoom:'', lastSync:0};
+var DEFAULTS={doubleTap:true, shake:true, vibration:true, clipboardSms:true, webotp:false, autoOpenSms:true, notify:false, notifyInterval:60, sync:false, syncRoom:'', lastSync:0, autoRegisterSms:false, notifyPayment:true, notifyGoal:true, notifyUnusual:true, notifyBillDue:true, monthlySaving:500000, game:true};
 Object.keys(DEFAULTS).forEach(function(k){ if(settings[k]===undefined) settings[k]=DEFAULTS[k]; });
-function persist(){ save(K_EXP, expenses); save(K_WISH, wishes); save(K_SET, settings); }
+function saveReminders(){ save(K_REM, reminders); }
+function defaultGame(){ return {xp:0, achievements:{}, challenges:{}, streak:{lastKey:'',count:0}, lastMotivationDay:0, m:Date.now()}; }
+var game = load(K_GAME, null);
+if(!game || typeof game!=='object'){ game=defaultGame(); }
+if(!game.achievements) game.achievements={};
+if(!game.challenges) game.challenges={};
+if(!game.streak) game.streak={lastKey:'',count:0};
+function saveGame(){ save(K_GAME, game); }
+function persist(){ save(K_EXP, expenses); save(K_WISH, wishes); save(K_SET, settings); saveReminders(); saveGame(); }
 
 /* ---------- categories ---------- */
 var CATS=[
@@ -924,6 +1112,7 @@ function goTab(id){
   if(id==='list') renderList();
   if(id==='wish') renderWishes();
   if(id==='stats') renderStats();
+  if(id==='game') renderGame();
   if(id==='settings') renderSettings();
 }
 $$('.nav-btn').forEach(function(b){
@@ -943,20 +1132,51 @@ function parseSms(t){
   if(!clean.length) return null;
   var amount=Math.max.apply(null,clean);
   var isRial=/ریال|ريال|IRR/i.test(t);
-  var isToman=/تومان|تومنی/i.test(t);
+  var isToman=/تومان|تومانی/i.test(t);
   if(isRial && !isToman) amount=Math.round(amount/10);
+  var isIncome=/واریز|افزایش|وصل|دریافت|تسویه.*افزایش/i.test(t);
   var name='';
-  var m=t.match(/فروشگاه\s*([^\s،؛؛:.]{2,20})/);
-  if(m) name=m[1].trim();
-  return {amount:amount, name:name};
+  var m=t.match(/فروشگاه\s*([^\s،؛:.()]{2,24})/); if(m) name=m[1].trim();
+  if(!name){ m=t.match(/(?:خرید|پرداخت)\s+(?:از\s+)?([^\s،؛:.()]{2,24})/); if(m) name=m[1].trim(); }
+  if(!name){ m=t.match(/از\s+([^\s،؛:.()]{2,24})/); if(m && !/بانک|کارت|حساب|شماره/.test(m[1])) name=m[1].trim(); }
+  if(name) name=name.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g,'');
+  return {amount:amount, name:name, type:isIncome?'income':'expense'};
+}
+function guessCatFromSms(t){
+  var s=String(t);
+  if(/تاکسی|اسنپ|ماشین|بنزین|سوخت|پارکینگ|مترو|اتوبوس/.test(s)) return 'transport';
+  if(/رستوران|کافه|غذا|ناهار|ساندویچ|پیتزا|فست|سوپرمارکت|نان|شیرینی/.test(s)) return 'food';
+  if(/قبض|برق|آب|گاز|تلفن|موبایل|شارژ|اینترنت/.test(s)) return 'bills';
+  if(/داروخانه|طب|بیمارستان|دکتر|دندان|کلینیک/.test(s)) return 'health';
+  if(/لباس|کفش|کیف|فروشگاه|خرید|بوتیک/.test(s)) return 'shopping';
+  return 'other';
 }
 function fillFromSms(t){
   var r=parseSms(t);
   if(!r) return false;
   $('#exp-amount').value=r.amount;
   if(r.name) $('#exp-name').value=r.name;
+  if(r.type==='expense' && guessCatFromSms(t)!=='other'){
+    currentCat=guessCatFromSms(t); renderCats();
+  }
   markQuick(-1);
   if(settings.autoOpenSms) openExpenseForm();
+  return true;
+}
+function autoRegisterSms(t){
+  var r=parseSms(t);
+  if(!r || !r.amount){ toast('⚠️ مبلغی در پیامک پیدا نشد'); return false; }
+  if(r.type==='income'){ toast('ℹ️ این پیامک واریز است — ثبت نشد'); return false; }
+  if(!currentCard && cards.length) currentCard=cards[0].id;
+  var name=r.name||'تراکنش بانکی';
+  var cat=guessCatFromSms(t);
+  var newExp={id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:r.amount, cat:cat, cardId:currentCard, note:'از پیامک: '+String(t).replace(/\s+/g,' ').substring(0,60), ts:Date.now(), m:Date.now()};
+  expenses.push(newExp);
+  persist(); scheduleSync(); renderAll();
+  onExpenseAdded(newExp);
+  vib(120);
+  toast('⚡ تراکنش از پیامک ثبت شد: '+fmt(r.amount)+' تومان');
+  $('#sms-input').value='';
   return true;
 }
 function openExpenseForm(){
@@ -974,10 +1194,14 @@ function tryClipboard(){
     if(!txt) return;
     var r=parseSms(txt);
     if(r && r.amount>0){
-      $('#exp-amount').value=r.amount;
-      if(r.name) $('#exp-name').value=r.name;
-      toast('📱 پیامک بانکی از کلیپ‌بورد خوانده شد: '+fmt(r.amount)+' تومان');
-      if(settings.autoOpenSms) openExpenseForm();
+      if(settings.autoRegisterSms && r.type!=='income'){
+        autoRegisterSms(txt);
+      } else {
+        $('#exp-amount').value=r.amount;
+        if(r.name) $('#exp-name').value=r.name;
+        toast('📱 پیامک بانکی از کلیپ‌بورد خوانده شد: '+fmt(r.amount)+' تومان');
+        if(settings.autoOpenSms) openExpenseForm();
+      }
     }
   }).catch(function(){ /* permission denied — ignore */ });
 }
@@ -1061,10 +1285,12 @@ function submitExpense(){
   var note=v($('#exp-note')).trim();
   if(!currentCard && cards.length) currentCard=cards[0].id;
   var expTs=jalaliStrToTs($('#exp-date').value)||Date.now();
-  expenses.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:expTs, m:Date.now()});
+  var newExp={id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amount, cat:currentCat, cardId:currentCard, note:note, ts:expTs, m:Date.now()};
+  expenses.push(newExp);
   persist();
   scheduleSync();
   renderAll();
+  onExpenseAdded(newExp);
   vib(120);
   toast('✅ خرج ثبت شد: '+fmt(amount)+' تومان');
   resetExpenseForm();
@@ -1073,6 +1299,17 @@ function submitExpense(){
 }
 $('#sms-input').addEventListener('input', function(){
   if(fillFromSms(this.value)) toast('📱 مبلغ از پیامک تشخیص داده شد');
+});
+$('#sms-autoreg').addEventListener('click', function(){
+  var t=v($('#sms-input'));
+  if(!t.trim()){ toast('⚠️ اول پیامک را اینجا Paste کن'); $('#sms-input').focus(); return; }
+  autoRegisterSms(t);
+});
+$('#sms-fill').addEventListener('click', function(){
+  var t=v($('#sms-input'));
+  if(!t.trim()){ toast('⚠️ اول پیامک را اینجا Paste کن'); $('#sms-input').focus(); return; }
+  if(fillFromSms(t)) toast('✍️ فرم پر شد — بررسی کن و ذخیره کن');
+  else toast('⚠️ مبلغی پیدا نشد');
 });
 
 /* ---------- expense list + edit + 3s delete ---------- */
@@ -1276,6 +1513,8 @@ function submitWish(){
     wishEditId=null;
   } else {
     wishes.push({id:Date.now()+''+Math.floor(Math.random()*9999), name:name, target:target, saved:0, img:wishImg||null, ts:Date.now(), m:Date.now()});
+    addXp(5);
+    checkAchievements();
     toast('🎯 آرزوی جدید ثبت شد');
   }
   $('#wish-name').value=''; $('#wish-target').value=''; $('#wish-file').value='';
@@ -1342,6 +1581,8 @@ function renderWishes(){
       +'<div class="wish-nums"><span>ذخیره: '+fmt(w.saved)+'</span><span>هدف: '+fmt(w.target)+'</span></div>'
       +'<div class="bar-wrap"><div class="bar" style="width:'+pct+'%;background:linear-gradient(90deg,'+color+','+color+'cc);box-shadow:0 0 14px '+color+'88"></div></div>'
       +'<div class="wish-nums"><span>مونده: <span class="wish-left">'+fmt(left)+'</span> تومان</span></div>'
+      +wishEtaHtml(w, pct, done)
+      +(pct>=80 && pct<100?'<div class="wish-soon">🔥 نزدیک هدف! '+toFaDigits(pct)+'٪ کامل شد</div>':'')
       +(done?'<div class="wish-done">🎉 تبریک! آماده خرید! ✨</div>':'')
       +'<div class="wish-card-source" style="font-size:.75rem;color:var(--muted);margin-top:6px">منبع: '+(getCard(w.savedCard||w.cardId)||{name:'نامشخص'}).name+'</div>'
       +'<div class="deposit-row" style="display:none" data-deprow="'+w.id+'">'
@@ -1380,6 +1621,7 @@ $('#wish-list').addEventListener('click', function(e){
     persist(); scheduleSync(); renderWishes(); vib(60);
     var wd=null; wishes.forEach(function(w){ if(w.id===id) wd=w; });
     toast('💰 '+fmt(amt)+' تومان به «'+wd.name+'» واریز شد');
+    if(wd) onWishDeposit(wd, amt);
     return;
   }
   if(depclose){
@@ -1428,6 +1670,7 @@ function statsData(){
   return {sums:sums, catSums:catSums};
 }
 function renderStats(){
+  renderUnusualAlert();
   var d=statsData();
   $('#st-today').textContent=fmt(d.sums.today);
   $('#st-week').textContent=fmt(d.sums.week);
@@ -1491,9 +1734,11 @@ function renderSettings(){
   });
   $('#notify-interval').value=String(settings.notifyInterval||60);
   $('#sync-room').value=settings.syncRoom||'';
+  var ms=$('#monthly-saving'); if(ms) ms.value=settings.monthlySaving||'';
+  renderRemindersManage();
   updateSyncStatus();
   var st=$('#notify-status');
-  if(!('Notification' in window)){ st.textContent='مرورگر شما از نوتیفیکیشن پشتیبانی نمی‌کند.'; return; }
+  if(typeof Notification==='undefined' || !Notification){ st.textContent='مرورگر شما از نوتیفیکیشن پشتیبانی نمی‌کند.'; return; }
   if(settings.notify){
     if(Notification.permission==='granted') st.textContent='✅ اجازه اعلان داده شده — هر '+fmtMinutes(settings.notifyInterval)+' یک یادآوری نمایش داده می‌شود.';
     else if(Notification.permission==='denied') st.textContent='⛔ اجازه اعلان در مرورگر رد شده — از تنظیمات مرورگر اجازه بده.';
@@ -1513,11 +1758,13 @@ $$('[data-set]').forEach(function(cb){
     persist();
     if(k==='notify') handleNotifyChange(cb.checked);
     if(k==='webotp'){ if(cb.checked) startOTP(); else stopOTP(); }
+    if(k==='game'){ applyGameVisibility(); if(cb.checked) renderGame(); }
+    if(k.indexOf('notify')===0 && k!=='notify' && cb.checked) ensureNotifyPermission();
   });
 });
 var notifyTimer=null;
 function handleNotifyChange(on){
-  if(!('Notification' in window)){ toast('⚠️ نوتیفیکیشن پشتیبانی نمی‌شود'); settings.notify=false; persist(); renderSettings(); return; }
+  if(typeof Notification==='undefined' || !Notification){ toast('⚠️ نوتیفیکیشن پشتیبانی نمی‌شود'); settings.notify=false; persist(); renderSettings(); return; }
   if(on){
     if(Notification.permission==='default'){
       try{
@@ -1541,7 +1788,7 @@ function handleNotifyChange(on){
 }
 function initNotify(){
   clearInterval(notifyTimer);
-  if(!settings.notify || !('Notification' in window) || Notification.permission!=='granted') return;
+  if(!settings.notify || typeof Notification==='undefined' || !Notification || Notification.permission!=='granted') return;
   notifyTimer=setInterval(function(){
     try{
       new Notification('🌙 یادآوری رویاچین', {body:'وقتشه خرج‌هایت را ثبت کنی! 💰', icon:'/icon-192.png', tag:'kwp-reminder'});
@@ -1589,6 +1836,8 @@ function localDoc(){
   expenses.forEach(function(e){ items['e:'+e.id]={t:'e', id:e.id, m:itemM(e), d:e}; });
   wishes.forEach(function(w){ items['w:'+w.id]={t:'w', id:w.id, m:itemM(w), d:w}; });
   cards.forEach(function(c){ items['c:'+c.id]={t:'c', id:c.id, m:c.m||c.ts||0, d:c}; });
+  reminders.forEach(function(r){ items['r:'+r.id]={t:'r', id:r.id, m:r.m||r.ts||0, d:r}; });
+  items['g:state']={t:'g', id:'state', m:game.m||0, d:game};
   Object.keys(tombs).forEach(function(k){
     var cur=items[k];
     if(!cur) items[k]={t:k.charAt(0), id:k.slice(2), del:true, m:tombs[k]};
@@ -1629,6 +1878,27 @@ function applyRemote(doc){
         if(!cf){ cards.push(r.d); changed=true; }
       }
       if(changed) saveCards();
+      return;
+    }
+    if(r.t==='r'){
+      if(r.del){
+        for(var ri=0;ri<reminders.length;ri++){
+          if(reminders[ri].id===r.id && (reminders[ri].m||0)<=r.m){
+            reminders.splice(ri,1); tombs[k]=Math.max(tombs[k]||0,r.m); changed=true; break;
+          }
+        }
+      } else {
+        var rf=false;
+        for(var rj=0;rj<reminders.length;rj++){
+          if(reminders[rj].id===r.id){ rf=true; if((reminders[rj].m||0)<(r.m||0)){ reminders[rj]=r.d; changed=true; } break; }
+        }
+        if(!rf){ reminders.push(r.d); changed=true; }
+      }
+      if(changed) saveReminders();
+      return;
+    }
+    if(r.t==='g'){
+      if((game.m||0) < (r.m||0)){ game=r.d; if(!game.streak) game.streak={lastKey:'',count:0}; if(!game.achievements) game.achievements={}; if(!game.challenges) game.challenges={}; saveGame(); changed=true; }
       return;
     }
     var arr = r.t==='e' ? expenses : wishes;
@@ -1762,13 +2032,15 @@ $('#reset-btn').addEventListener('click', function(){
     return;
   }
   clearInterval(resetTimer); resetArmed=false;
-  expenses=[]; wishes=[]; settings=load(K_SET,{});
+  expenses=[]; wishes=[]; reminders=[]; game=defaultGame();
+  Object.keys(tombs).forEach(function(k){ if(k.charAt(0)==='r'||k.charAt(0)==='g') delete tombs[k]; });
+  settings=load(K_SET,{});
   Object.keys(DEFAULTS).forEach(function(k){ if(settings[k]===undefined) settings[k]=DEFAULTS[k]; });
-  persist();
+  persist(); saveTombs();
   var btn=$('#reset-btn');
   btn.classList.remove('armed');
   btn.textContent='پاک کردن همه داده‌ها';
-  renderAll(); renderSettings(); initNotify();
+  renderAll(); renderSettings(); renderRemindersManage(); renderRemindersBanner(); applyGameVisibility(); initNotify();
   toast('🗑️ همه داده‌ها پاک شد');
   vib(80);
 });
@@ -1827,8 +2099,519 @@ if(false){
   });
 }
 
+/* ---------- notifications helper ---------- */
+function notify(title, body, tag){
+  try{
+    if(typeof Notification==='undefined' || !Notification) return;
+    if(Notification.permission!=='granted') return;
+    new Notification(title, {body:body||'', icon:'/icon-192.png', tag:tag||'kwp'});
+  }catch(e){}
+}
+function ensureNotifyPermission(){
+  if(typeof Notification==='undefined' || !Notification) return;
+  if(Notification.permission==='default'){
+    try{ var pr=Notification.requestPermission(); if(pr&&pr.then) pr.then(function(){}); }catch(e){}
+  }
+}
+
+/* ---------- XP / level / streak ---------- */
+var LEVEL_TITLES=[
+  {min:1,title:'تازه‌کار',icon:'🌱'},
+  {min:2,title:'کوشا',icon:'🌿'},
+  {min:4,title:'پس‌اندازکننده',icon:'💧'},
+  {min:6,title:'مدیر مالی',icon:'📊'},
+  {min:9,title:'استاد پس‌انداز',icon:'🏆'},
+  {min:13,title:'نخبه رویاچین',icon:'👑'}
+];
+function levelInfo(){
+  var xp=game.xp||0, lvl=1, need=100, base=0;
+  while(xp>=base+need){ base+=need; lvl++; need=Math.round(need*1.35); }
+  return {level:lvl, base:base, need:need, into:Math.max(0,xp-base)};
+}
+function levelTitle(lvl){
+  var t=LEVEL_TITLES[0];
+  for(var i=0;i<LEVEL_TITLES.length;i++) if(lvl>=LEVEL_TITLES[i].min) t=LEVEL_TITLES[i];
+  return t;
+}
+function addXp(n){
+  if(n<=0) return;
+  var before=levelInfo().level;
+  game.xp=(game.xp||0)+n; game.m=Date.now();
+  var after=levelInfo().level;
+  saveGame();
+  if(after>before){
+    var lt=levelTitle(after);
+    toast('🎉 سطح بالا رفت! رسیدی به سطح '+toFaDigits(after)+' — '+lt.icon+' '+lt.title);
+    notify('🌙 سطح جدید!', 'تبریک! رسیدی به سطح '+toFaDigits(after)+' ('+lt.title+')', 'kwp-lvl');
+    vib([60,40,120]);
+    renderGame();
+  }
+}
+function bumpStreak(){
+  var todayKey=tsToJalaliStr(Date.now());
+  game.streak=game.streak||{lastKey:'',count:0};
+  if(game.streak.lastKey===todayKey) return;
+  var yKey=tsToJalaliStr(Date.now()-86400000);
+  if(game.streak.lastKey===yKey) game.streak.count=(game.streak.count||0)+1;
+  else game.streak.count=1;
+  game.streak.lastKey=todayKey; game.m=Date.now(); saveGame();
+}
+
+/* ---------- achievements ---------- */
+var ACHIEVEMENTS=[
+  {id:'first_exp',icon:'✍️',name:'اولین خرج',desc:'اولین خرج را ثبت کن',xp:10},
+  {id:'exp10',icon:'📝',name:'ده خرج',desc:'۱۰ خرج ثبت کن',xp:30},
+  {id:'exp50',icon:'📚',name:'پنجاه خرج',desc:'۵۰ خرج ثبت کن',xp:80},
+  {id:'first_wish',icon:'🎯',name:'اولین آرزو',desc:'یک آرزو ثبت کن',xp:15},
+  {id:'wish_done',icon:'🎉',name:'آرزو محقق شد',desc:'یک آرزو را کامل کن',xp:100},
+  {id:'save_1m',icon:'💰',name:'میلیونر کوچک',desc:'در مجموع ۱٬۰۰۰٬۰۰۰ تومان پس‌انداز کن',xp:120},
+  {id:'streak7',icon:'🔥',name:'هفته پر',desc:'۷ روز پشت‌سرهم خرج ثبت کن',xp:60},
+  {id:'challenge7',icon:'📅',name:'چالش ۷ روزه',desc:'چالش ۷ روزه را کامل کن',xp:80},
+  {id:'challenge30',icon:'🗓️',name:'چالش ۳۰ روزه',desc:'چالش ۳۰ روزه را کامل کن',xp:200},
+  {id:'category_all',icon:'🌈',name:'یکدست نیست',desc:'از همه دسته‌ها خرج ثبت کن',xp:50},
+  {id:'scan_first',icon:'📷',name:'اسکن اول',desc:'یک فاکتور را اسکن کن',xp:20},
+  {id:'reminder_paid',icon:'✅',name:'سر وقت',desc:'یک قسط/قبض را به‌موقع پرداخت کن',xp:40}
+];
+function unlockAchievement(id){
+  if(!id || game.achievements[id]) return;
+  var a=null; for(var i=0;i<ACHIEVEMENTS.length;i++) if(ACHIEVEMENTS[i].id===id) a=ACHIEVEMENTS[i];
+  if(!a) return;
+  game.achievements[id]=Date.now(); game.m=Date.now(); saveGame();
+  toast('🏅 مدال جدید: '+a.name+' (+'+toFaDigits(a.xp)+' XP)');
+  notify('🏅 مدال جدید!', a.name+' — '+a.desc, 'kwp-ach');
+  addXp(a.xp);
+  vib([50,30,80]);
+  renderGame();
+}
+function checkAchievements(){
+  if(expenses.length>=1) unlockAchievement('first_exp');
+  if(expenses.length>=10) unlockAchievement('exp10');
+  if(expenses.length>=50) unlockAchievement('exp50');
+  if(wishes.length>=1) unlockAchievement('first_wish');
+  if(wishes.some(function(w){return w.target>0&&w.saved>=w.target;})) unlockAchievement('wish_done');
+  var totalSaved=0; wishes.forEach(function(w){ totalSaved+=Math.min(w.saved||0,w.target||0); });
+  if(totalSaved>=1000000) unlockAchievement('save_1m');
+  var cats={}; expenses.forEach(function(e){ cats[e.cat]=1; });
+  if(Object.keys(cats).length>=CATS.length) unlockAchievement('category_all');
+  if(game.streak && game.streak.count>=7) unlockAchievement('streak7');
+}
+
+/* ---------- hooks: expense added / wish deposit ---------- */
+function onExpenseAdded(e){
+  addXp(10);
+  bumpStreak();
+  checkAchievements();
+  if(settings.notifyPayment) notify('💸 پرداخت ثبت شد', fmt(e.amount)+' تومان — '+e.name, 'kwp-pay');
+  var u=detectUnusual(e);
+  if(u){
+    toast('⚠️ خرج غیرعادی: '+fmt(e.amount)+' تومان (میانگین این دسته '+fmt(u.avg)+' بود)');
+    if(settings.notifyUnusual) notify('⚠️ خرج غیرعادی', e.name+': '+fmt(e.amount)+' تومان — حدود '+toFaDigits(Math.round(u.factor))+' برابر میانگین دسته', 'kwp-unusual');
+    vib([80,40,80]);
+    renderUnusualAlert();
+  }
+}
+function onWishDeposit(w, amt){
+  addXp(25);
+  checkAchievements();
+  if(settings.notifyPayment) notify('💰 واریز به آرزو', fmt(amt)+' تومان به «'+w.name+'» واریز شد', 'kwp-dep');
+  if(w.target>0){
+    var pct=Math.min(100,Math.round((w.saved||0)/w.target*100));
+    w.notified=w.notified||{};
+    if(pct>=80 && pct<100 && !w.notified['80']){ w.notified['80']=1; persist(); if(settings.notifyGoal){ notify('🔥 نزدیک هدف!', 'آرزوی «'+w.name+'» به '+toFaDigits(pct)+'٪ رسید', 'kwp-goal'); toast('🔥 «'+w.name+'» نزدیک هدف شد!'); } }
+    if(pct>=90 && pct<100 && !w.notified['90']){ w.notified['90']=1; persist(); if(settings.notifyGoal){ notify('🔥 خیلی نزدیک!', 'آرزوی «'+w.name+'» به '+toFaDigits(pct)+'٪ رسید', 'kwp-goal'); } }
+    if((w.saved||0)>=w.target && !w.notified['100']){ w.notified['100']=1; persist(); if(settings.notifyGoal){ notify('🎉 آرزو محقق شد!', 'تبریک! «'+w.name+'» کامل شد 🎉', 'kwp-goal'); toast('🎉 آرزوی «'+w.name+'» کامل شد!'); vib([60,40,60,40,120]); } unlockAchievement('wish_done'); }
+  }
+}
+
+/* ---------- unusual expense detection ---------- */
+function detectUnusual(e){
+  var same=expenses.filter(function(x){ return x.id!==e.id && x.cat===e.cat; });
+  if(same.length<3) return null;
+  var sum=0; same.forEach(function(x){ sum+=x.amount; });
+  var avg=sum/same.length;
+  if(avg<=0) return null;
+  if(e.amount >= avg*2.2) return {avg:avg, factor:e.amount/avg};
+  return null;
+}
+function renderUnusualAlert(){
+  var box=$('#unusual-alert'); if(!box) return;
+  var body=$('#unusual-alert-body'); if(!body) return;
+  var list=[];
+  expenses.slice().sort(function(a,b){ return b.ts-a.ts; }).forEach(function(e){
+    if(list.length>=3) return;
+    var u=detectUnusual(e);
+    if(u) list.push({e:e,u:u});
+  });
+  if(!list.length){ box.style.display='none'; return; }
+  box.style.display='';
+  var html='<div class="alert-title">⚠️ خرج‌های غیرعادی اخیر</div>';
+  list.forEach(function(x){
+    html+='<div class="alert-row"><span>📊 '+esc(x.e.name)+'</span><span class="alert-sub">~'+toFaDigits(Math.round(x.u.factor))+' برابر میانگین دسته</span><span class="alert-amt">'+fmt(x.e.amount)+' ت</span></div>';
+  });
+  body.innerHTML=html;
+}
+
+/* ---------- goal ETA suggestion ---------- */
+function etaLabel(days){
+  if(days<=0) return 'الان!';
+  if(days<30) return toFaDigits(days)+' روز';
+  if(days<365) return toFaDigits(Math.round(days/30))+' ماه';
+  return toFaDigits((days/365).toFixed(1))+' سال';
+}
+function wishEtaHtml(w, pct, done){
+  if(done || w.target<=0 || (w.saved||0)<=0) return '';
+  var left=Math.max(0, w.target-w.saved);
+  var daysSince=Math.max(1, Math.round((Date.now()-(w.ts||Date.now()))/86400000));
+  var ratePerDay=(w.saved||0)/daysSince;
+  var etaDays = ratePerDay>0 ? Math.ceil(left/ratePerDay) : 0;
+  var for6=Math.ceil(left/6);
+  var for3=Math.ceil(left/3);
+  var html='<div class="wish-eta">';
+  if(etaDays>0 && etaDays<4000) html+='📅 با ریتم فعلی: حدود <b>'+etaLabel(etaDays)+'</b> تا هدف<br>';
+  html+='💡 پیشنهاد: برای رسیدن در ۳ ماه، ماهی <b>'+fmt(for3)+'</b> ت • در ۶ ماه، ماهی <b>'+fmt(for6)+'</b> ت (روزانه ~<b>'+fmt(Math.ceil(for6/30))+'</b> ت)';
+  html+='</div>';
+  return html;
+}
+
+/* ---------- reminders (bills / installments) ---------- */
+function addReminder(o){
+  o.id='r_'+Date.now()+'_'+Math.floor(Math.random()*9999);
+  o.m=Date.now(); o.paid=false; o.notified={};
+  reminders.push(o); saveReminders(); scheduleSync();
+  renderRemindersManage(); renderRemindersBanner();
+  toast('⏰ یادآور ثبت شد');
+}
+function deleteReminder(id){
+  tombs['r:'+id]=Date.now(); saveTombs();
+  reminders=reminders.filter(function(r){ return r.id!==id; });
+  saveReminders(); scheduleSync(); renderRemindersManage(); renderRemindersBanner();
+  toast('🗑️ یادآور حذف شد');
+}
+function advanceDue(ts, repeat){
+  if(!ts) return null;
+  if(repeat==='weekly') return ts+7*86400000;
+  if(repeat==='yearly'){ var d=new Date(ts); d.setFullYear(d.getFullYear()+1); return d.getTime(); }
+  if(repeat==='monthly'){ var d2=new Date(ts); d2.setMonth(d2.getMonth()+1); return d2.getTime(); }
+  return null;
+}
+function toggleReminderPaid(id){
+  var r=null; reminders.forEach(function(x){ if(x.id===id) r=x; });
+  if(!r) return;
+  r.paid=!r.paid; r.m=Date.now();
+  if(r.paid){
+    var onTime = r.dueTs && Date.now() <= (r.dueTs+2*86400000);
+    addXp(20);
+    if(onTime) unlockAchievement('reminder_paid');
+    toast('✅ «'+r.title+'» پرداخت شد');
+    if(settings.notifyPayment) notify('✅ پرداخت شد', r.title, 'kwp-billpay');
+    if(r.repeat && r.repeat!=='none'){
+      var next=advanceDue(r.dueTs, r.repeat);
+      if(next) addReminder({title:r.title, amount:r.amount, type:r.type, dueTs:next, repeat:r.repeat});
+    }
+  } else { toast('↩️ پرداخت لغو شد'); }
+  saveReminders(); scheduleSync(); renderRemindersManage(); renderRemindersBanner();
+}
+function renderRemindersBanner(){
+  var box=$('#rem-banner'); if(!box) return;
+  var now=Date.now();
+  var up=reminders.filter(function(r){ return !r.paid && r.dueTs && r.dueTs < now+4*86400000; });
+  up.sort(function(a,b){ return a.dueTs-b.dueTs; });
+  if(!up.length){ box.style.display='none'; return; }
+  box.style.display='';
+  var html='';
+  up.slice(0,4).forEach(function(r){
+    var over=r.dueTs<now;
+    var days=Math.round((r.dueTs-now)/86400000);
+    var lbl = over? 'عقب افتاده' : days===0? 'امروز' : days+' روز بعد';
+    html+='<div class="rem-row'+(over?' rem-overdue':'')+'">'
+      +'<div class="rem-main"><div class="rem-name">'+esc(r.title)+'</div><div class="rem-sub">'+(r.type==='installment'?'قسط':'قبض')+' • '+lbl+' • '+faDate(r.dueTs)+'</div></div>'
+      +'<div class="rem-side">'+(r.amount?fmt(r.amount)+' ت':'')+'<button class="mini ok" data-rempay="'+r.id+'">✅ پرداخت</button></div>'
+      +'</div>';
+  });
+  $('#rem-banner-list').innerHTML=html;
+}
+function renderRemindersManage(){
+  var box=$('#rem-manage-list'); if(!box) return;
+  if(!reminders.length){ box.innerHTML='<div class="empty" style="padding:12px">هنوز یادآوری ثبت نشده ⏰</div>'; return; }
+  var html='';
+  reminders.slice().sort(function(a,b){ return (a.dueTs||0)-(b.dueTs||0); }).forEach(function(r){
+    var now=Date.now();
+    var over=r.dueTs && r.dueTs<now && !r.paid;
+    var days=r.dueTs?Math.round((r.dueTs-now)/86400000):null;
+    var lbl = !r.dueTs?'بدون تاریخ' : over?'عقب افتاده' : days===0?'امروز' : days+' روز بعد';
+    html+='<div class="rem-manage-row'+(r.paid?' paid':'')+'">'
+      +'<div class="rem-manage-main"><div class="rem-manage-name">'+esc(r.title)+(r.amount?' • '+fmt(r.amount)+' ت':'')+'</div>'
+      +'<div class="rem-manage-meta"><span class="rem-tag'+(r.type==='bill'?' bill':'')+'">'+(r.type==='installment'?'قسط':'قبض')+'</span> '+lbl+' • '+faDate(r.dueTs||Date.now())+(r.repeat&&r.repeat!=='none'?' • تکرار: '+({weekly:'هفتگی',monthly:'ماهانه',yearly:'سالانه'}[r.repeat]):'')+'</div></div>'
+      +'<button class="mini ok" data-rempay="'+r.id+'">'+(r.paid?'↩️ لغو':'✅ پرداخت')+'</button>'
+      +'<button class="mini danger" data-remdel="'+r.id+'">🗑️</button>'
+      +'</div>';
+  });
+  box.innerHTML=html;
+}
+function checkDueReminders(){
+  if(!settings.notifyBillDue) return;
+  if(typeof Notification==='undefined' || !Notification || Notification.permission!=='granted') return;
+  var now=Date.now(), dayKey=tsToJalaliStr(now);
+  reminders.forEach(function(r){
+    if(r.paid||!r.dueTs) return;
+    r.notified=r.notified||{};
+    if(r.dueTs<=now+86400000 && !r.notified[dayKey]){
+      r.notified[dayKey]=1; saveReminders();
+      var over=r.dueTs<now;
+      notify('⏰ '+(over?'یادآور عقب افتاده':'سررسید یادآور'), r.title+(r.amount?' — '+fmt(r.amount)+' تومان':''), 'kwp-billdue');
+    }
+  });
+}
+function startReminderLoop(){ setInterval(checkDueReminders, 60000); checkDueReminders(); }
+$('#rem-banner').addEventListener('click', function(e){
+  var b=e.target.closest('[data-rempay]'); if(b){ toggleReminderPaid(b.getAttribute('data-rempay')); }
+});
+$('#rem-manage-list').addEventListener('click', function(e){
+  var p=e.target.closest('[data-rempay]'); if(p){ toggleReminderPaid(p.getAttribute('data-rempay')); return; }
+  var d=e.target.closest('[data-remdel]'); if(d){ deleteReminder(d.getAttribute('data-remdel')); }
+});
+$('#rem-add').addEventListener('click', function(){
+  var title=v($('#rem-title')).trim();
+  if(!title){ toast('⚠️ عنوان یادآور را وارد کن'); $('#rem-title').focus(); return; }
+  var raw=toEnDigits(v($('#rem-amount'))).replace(/[,٬، ]/g,'');
+  var amount=parseFloat(raw)||0;
+  var type=v($('#rem-type'));
+  var dueTs=jalaliStrToTs($('#rem-due').value)||Date.now();
+  var repeat=v($('#rem-repeat'));
+  addReminder({title:title, amount:amount, type:type, dueTs:dueTs, repeat:repeat});
+  $('#rem-title').value=''; $('#rem-amount').value=''; $('#rem-due').value=todayJalaliStr(); $('#rem-repeat').value='none';
+});
+
+/* ---------- monthly saving setting ---------- */
+$('#monthly-saving').addEventListener('input', function(){
+  var raw=toEnDigits(v(this)).replace(/[,٬، ]/g,'');
+  var n=parseFloat(raw);
+  settings.monthlySaving = (n && !isNaN(n) && n>0) ? n : 500000;
+  persist(); renderWishes();
+});
+
+/* ---------- invoice scan (camera + OCR) ---------- */
+$('#invoice-snap-btn').addEventListener('click', function(){ $('#invoice-file').click(); });
+$('#invoice-file').addEventListener('change', function(){
+  var f=this.files && this.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var maxW=1600, w=img.width, h=img.height;
+      if(w>maxW){ h=Math.round(h*maxW/w); w=maxW; }
+      var c=document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      var url=c.toDataURL('image/jpeg',0.85);
+      var prev=$('#invoice-preview');
+      prev.innerHTML='<img src="'+url+'" alt="فاکتور">';
+      prev.style.display='flex';
+      var ocr=$('#invoice-ocr'); ocr.style.display='block';
+      ocr.dataset.url=url;
+    };
+    img.src=r.result;
+  };
+  r.readAsDataURL(f);
+});
+function loadTesseract(cb){
+  if(window.Tesseract){ cb(null); return; }
+  var s=document.createElement('script');
+  s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+  s.onload=function(){ cb(null); };
+  s.onerror=function(){ cb(new Error('بارگذاری OCR ناموفق بود')); };
+  document.head.appendChild(s);
+}
+function runOcr(imgEl, cb){
+  loadTesseract(function(err){
+    if(err){ cb(err); return; }
+    try{
+      window.Tesseract.recognize(imgEl, 'fas+eng', {
+        logger:function(m){ if(m && m.status){ $('#ocr-prog').textContent='OCR: '+m.status+(m.progress?' '+Math.round(m.progress*100)+'٪':''); } }
+      }).then(function(res){ cb(null, (res&&res.data&&res.data.text)||''); }).catch(function(e){ cb(e); });
+    }catch(e){ cb(e); }
+  });
+}
+function parseInvoiceText(text){
+  if(!text) return {};
+  var s=toEnDigits(text);
+  var nums=s.match(/(\d[\d,٬،.]*\d|\d+)/g)||[];
+  var clean=[]; nums.forEach(function(n){ var x=parseFloat(n.replace(/[,٬،.]/g,'')); if(!isNaN(x)&&x>0) clean.push(x); });
+  var amount=clean.length?Math.max.apply(null,clean):0;
+  var item='';
+  var lines=String(text).split(/\n/).map(function(l){return l.trim();}).filter(Boolean);
+  for(var i=0;i<lines.length;i++){ if(!/^\s*[\d.,٬،]+\s*$/.test(lines[i]) && lines[i].length>2){ item=lines[i].substring(0,40); break; } }
+  return {amount:amount, item:item};
+}
+$('#invoice-ocr-btn').addEventListener('click', function(){
+  var url=$('#invoice-ocr').dataset.url; if(!url){ toast('⚠️ اول عکس فاکتور را بگیر'); return; }
+  var img=$('#invoice-preview').querySelector('img'); if(!img) return;
+  var prog=$('#ocr-prog'); prog.style.display='block'; prog.textContent='در حال آماده‌سازی OCR...';
+  runOcr(img, function(err, text){
+    prog.style.display='none';
+    if(err){ toast('⚠️ OCR ناموفق بود — مبلغ را دستی وارد کن'); $('#invoice-result').style.display='block'; return; }
+    var parsed=parseInvoiceText(text);
+    $('#inv-amount').value=parsed.amount||'';
+    $('#inv-item').value=parsed.item||'';
+    $('#invoice-result').style.display='block';
+    toast('📷 استخراج انجام شد — بررسی کن و ثبت کن');
+    unlockAchievement('scan_first');
+  });
+});
+$('#inv-save').addEventListener('click', function(){
+  var raw=toEnDigits(v($('#inv-amount'))).replace(/[,٬، ]/g,'');
+  var amt=parseFloat(raw);
+  if(!amt||isNaN(amt)||amt<=0){ toast('⚠️ مبلغ را وارد کن'); return; }
+  var name=v($('#inv-item')).trim()||'فاکتور اسکن‌شده';
+  if(!currentCard && cards.length) currentCard=cards[0].id;
+  var expTs=jalaliStrToTs($('#exp-date').value)||Date.now();
+  var newExp={id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amt, cat:currentCat, cardId:currentCard, note:v($('#inv-note')).trim()||'فاکتور اسکن‌شده', ts:expTs, m:Date.now()};
+  expenses.push(newExp); persist(); scheduleSync(); renderAll(); onExpenseAdded(newExp);
+  vib(120); toast('✅ از فاکتور خرج ثبت شد: '+fmt(amt)+' تومان');
+  $('#invoice-preview').innerHTML=''; $('#invoice-preview').style.display='none';
+  $('#invoice-ocr').style.display='none'; $('#invoice-result').style.display='none';
+  $('#invoice-file').value='';
+});
+
+/* ---------- challenges ---------- */
+var CHALLENGES=[
+  {id:'save7',name:'چالش ۷ روزه پس‌انداز',days:7,type:'save',icon:'📅',desc:'هر روز ۵۰٬۰۰۰ تومان به آرزوها واریز کن'},
+  {id:'save30',name:'چالش ۳۰ روزه پس‌انداز',days:30,type:'save',icon:'🗓️',desc:'هر روز ۲۰٬۰۰۰ تومان پس‌انداز کن'},
+  {id:'inc7',name:'پله‌پله (۱ تا ۷)',days:7,type:'increasing',icon:'📈',desc:'روز اول ۱۰٬۰۰۰، روز دوم ۲۰٬۰۰۰ ... روز هفتم ۷۰٬۰۰۰ تومان'},
+  {id:'nospend7',name:'هفته خرید آگاهانه',days:7,type:'nospend',icon:'🧘',desc:'۷ روز فقط خرج ضروری و از خرید غیرضروری پرهیز کن'}
+];
+function startChallenge(cid){
+  var c=null; for(var i=0;i<CHALLENGES.length;i++) if(CHALLENGES[i].id===cid) c=CHALLENGES[i];
+  if(!c) return;
+  game.challenges[cid]={startedTs:Date.now(), days:{}, completedTs:0, m:Date.now()};
+  saveGame(); renderGame(); scheduleSync();
+  toast('🎯 چالش «'+c.name+'» شروع شد! روز اول را ثبت کن');
+}
+function cancelChallenge(cid){ delete game.challenges[cid]; saveGame(); renderGame(); scheduleSync(); toast('چالش لغو شد'); }
+function markChallengeDay(cid){
+  var c=null; for(var i=0;i<CHALLENGES.length;i++) if(CHALLENGES[i].id===cid) c=CHALLENGES[i];
+  var st=game.challenges[cid]; if(!c||!st) return;
+  var key=tsToJalaliStr(Date.now());
+  if(st.days[key]){ delete st.days[key]; }
+  else { st.days[key]={ts:Date.now()}; }
+  st.m=Date.now();
+  var done=Object.keys(st.days).length;
+  if(done>=c.days && !st.completedTs){
+    st.completedTs=Date.now();
+    if(c.id==='save7') unlockAchievement('challenge7');
+    if(c.id==='save30') unlockAchievement('challenge30');
+    addXp(c.id==='save30'?200:80);
+    toast('🎉 چالش «'+c.name+'» کامل شد!');
+    notify('🎉 چالش کامل شد!', c.name, 'kwp-ch');
+    vib([60,40,120]);
+  }
+  saveGame(); renderGame(); scheduleSync();
+}
+function challengeDaysHtml(c, st){
+  var html='', todayKey=tsToJalaliStr(Date.now());
+  for(var i=0;i<c.days;i++){
+    var key=tsToJalaliStr(st.startedTs + i*86400000);
+    var d=!!st.days[key], isToday=key===todayKey;
+    html+='<span class="ch-day'+(d?' done':'')+(isToday?' today':'')+'" title="روز '+toFaDigits(i+1)+'">'+toFaDigits(i+1)+'</span>';
+  }
+  return html;
+}
+function renderChallenges(){
+  var box=$('#ch-list'); if(!box) return;
+  var html='';
+  CHALLENGES.forEach(function(c){
+    var st=game.challenges[c.id];
+    if(st && !st.completedTs){
+      var done=Object.keys(st.days).length;
+      var pct=Math.round(done/c.days*100);
+      html+='<div class="ch-card glass">'
+        +'<div class="ch-head"><span class="ch-ic">'+c.icon+'</span><span class="ch-name">'+esc(c.name)+'</span><span class="ch-prog">'+toFaDigits(done)+'/'+toFaDigits(c.days)+'</span></div>'
+        +'<div class="ch-desc">'+esc(c.desc)+'</div>'
+        +'<div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%"></div></div>'
+        +'<div class="ch-days">'+challengeDaysHtml(c, st)+'</div>'
+        +'<div class="ch-acts"><button class="mini ok" data-chday="'+c.id+'">✅ ثبت امروز</button><button class="mini danger" data-chcancel="'+c.id+'">لغو</button></div>'
+        +'</div>';
+    } else if(st && st.completedTs){
+      html+='<div class="ch-card glass done"><div class="ch-head"><span class="ch-ic">'+c.icon+'</span><span class="ch-name">'+esc(c.name)+'</span><span class="ch-prog">✅ کامل شد</span></div></div>';
+    } else {
+      html+='<div class="ch-card glass">'
+        +'<div class="ch-head"><span class="ch-ic">'+c.icon+'</span><span class="ch-name">'+esc(c.name)+'</span></div>'
+        +'<div class="ch-desc">'+esc(c.desc)+'</div>'
+        +'<div class="ch-acts"><button class="btn-ghost" data-chstart="'+c.id+'">شروع چالش</button></div>'
+        +'</div>';
+    }
+  });
+  box.innerHTML=html;
+}
+$('#ch-list').addEventListener('click', function(e){
+  var s=e.target.closest('[data-chstart]'); if(s){ startChallenge(s.getAttribute('data-chstart')); return; }
+  var d=e.target.closest('[data-chday]'); if(d){ markChallengeDay(d.getAttribute('data-chday')); return; }
+  var c=e.target.closest('[data-chcancel]'); if(c){ cancelChallenge(c.getAttribute('data-chcancel')); }
+});
+
+/* ---------- motivation ---------- */
+var MOTIVATIONS=[
+  'هر ریال پس‌انداز، آجرِ آرزوهایته 🧱',
+  'امروز یک خرج کم کن، فردا یک آرزو نزدیک‌تر میشه ✨',
+  'ثبت خرج، اولین قدمِ کنترل پوله 📊',
+  'آرزوها با صبر و پس‌انداز محقق میشن 🌙',
+  'خرید هوشمندانه‌تر = آرزو سریع‌تر 🎯',
+  'هر روز یه قدم کوچیک، یه تغییر بزرگ 🐾',
+  'پس‌اندازت، آینده‌اته 🌱',
+  'نظم در ثبت خرج = آرامش مالی 🧘',
+  'به خودت قول بده و بهش وفادار باش 💪',
+  'هزینه‌های کوچیک، روی هم بزرگ میشن 🔍',
+  'پولی که ثبت نمیشه، انگار خرج نشده 📝',
+  'هدف امروزت: یک خرج غیرضروری کم کن ✂️'
+];
+function showMotivation(){
+  var box=$('#motiv'); if(!box) return;
+  var doy=Math.floor(Date.now()/86400000);
+  box.textContent=MOTIVATIONS[doy % MOTIVATIONS.length];
+}
+function maybeDailyMotivation(){
+  var doy=Math.floor(Date.now()/86400000);
+  if(game.lastMotivationDay!==doy){
+    game.lastMotivationDay=doy; saveGame();
+    setTimeout(function(){ toast('💬 '+MOTIVATIONS[doy % MOTIVATIONS.length]); }, 1800);
+  }
+}
+
+/* ---------- game render ---------- */
+function renderAchievements(){
+  var box=$('#ach-grid'); if(!box) return;
+  var html='';
+  ACHIEVEMENTS.forEach(function(a){
+    var on=!!game.achievements[a.id];
+    html+='<div class="ach'+(on?'':' locked')+'" title="'+esc(a.desc)+'">'
+      +'<div class="ach-ic">'+a.icon+'</div>'
+      +'<div class="ach-name">'+esc(a.name)+'</div>'
+      +'<div class="ach-xp">'+(on?'✅':'🔒')+' +'+toFaDigits(a.xp)+'</div>'
+      +'</div>';
+  });
+  box.innerHTML=html;
+}
+function renderGame(){
+  var info=levelInfo(), lt=levelTitle(info.level);
+  var lvl=$('#game-level'); if(lvl) lvl.textContent=toFaDigits(info.level);
+  var ic=$('#game-level-icon'); if(ic) ic.textContent=lt.icon;
+  var tt=$('#game-title'); if(tt) tt.textContent=lt.title;
+  var xp=$('#game-xp'); if(xp) xp.textContent=toFaDigits(info.into)+' / '+toFaDigits(info.need)+' XP';
+  var bar=$('#game-xpbar'); if(bar) bar.style.width=Math.min(100,Math.round(info.into/Math.max(1,info.need)*100))+'%';
+  var tx=$('#game-totalxp'); if(tx) tx.textContent=toFaDigits(game.xp||0);
+  var sk=$('#game-streak'); if(sk) sk.textContent=toFaDigits((game.streak&&game.streak.count)||0);
+  renderAchievements();
+  renderChallenges();
+  showMotivation();
+}
+function applyGameVisibility(){
+  var nav=$('#nav-game'), tab=$('#tab-game');
+  var show=!!settings.game;
+  if(nav) nav.style.display = show ? '' : 'none';
+  if(tab) tab.style.display = show ? '' : 'none';
+}
+
 /* ---------- init ---------- */
-function renderAll(){ renderSummary(); renderList(); renderWishes(); renderWishAnnounce(); renderStats(); renderAllCardChips(); }
+function renderAll(){ renderSummary(); renderList(); renderWishes(); renderWishAnnounce(); renderStats(); renderAllCardChips(); renderRemindersBanner(); renderGame(); }
  // migrate old expenses without cardId
 (function migrateCards(){
   var changed=false;
@@ -1839,11 +2622,16 @@ renderQuick();
 renderCats();
 renderCardChips('card-chips', currentCard);
 $('#exp-date').value=todayJalaliStr();
+$('#rem-due').value=todayJalaliStr();
 setDefaultExpandedMonths();
+applyGameVisibility();
 renderAll();
 renderSettings();
 updateSyncStatus();
 initNotify();
+startReminderLoop();
+maybeDailyMotivation();
+setTimeout(function(){ checkAchievements(); }, 200);
 if(settings.webotp) startOTP();
 if(settings.sync && settings.syncRoom) setTimeout(function(){ doSync(); }, 900);
 setTimeout(function(){ tryClipboard(); }, 700);
