@@ -352,6 +352,55 @@ details.guide[open] summary::after{content:'▴'}
 .ch-day.done{background:linear-gradient(135deg,#22c55e,#00e5c3);color:#03150f;border-color:transparent;box-shadow:0 0 10px rgba(34,197,94,.5)}
 .ch-day.today{border-color:var(--gold);color:var(--gold);box-shadow:0 0 10px rgba(255,217,61,.5)}
 .ch-acts{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- dashboard ---------- */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.dash-mini{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.fin-card{padding:16px}
+.fin-top{display:flex;align-items:center;gap:14px}
+.fin-ring{width:72px;height:72px;border-radius:50%;flex:none;position:relative;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--c,#22c55e) var(--deg,0deg),rgba(255,255,255,.1) 0)}
+.fin-ring::before{content:'';position:absolute;inset:7px;border-radius:50%;background:var(--bg)}
+.fin-ring span{position:relative;z-index:1;font-size:1.15rem;font-weight:900;color:#fff;text-shadow:0 0 10px rgba(0,229,195,.6)}
+.fin-main{flex:1;min-width:0}
+.fin-label{font-size:.78rem;color:var(--muted)}
+.fin-status{font-size:1.05rem;font-weight:800;margin:2px 0}
+.fin-bar{height:8px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
+.fin-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#ef4444,#eab308,#22c55e);transition:width .6s}
+.fin-meta{font-size:.7rem;color:var(--muted);margin-top:6px;line-height:1.6}
+.suggest-card{padding:14px 16px;border-color:rgba(0,229,195,.3)}
+.suggest-label{font-size:.78rem;color:var(--neon2);font-weight:700;margin-bottom:6px}
+.suggest-text{font-size:.92rem;line-height:2;color:#fff;font-weight:600}
+.cmp-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.1);font-size:.85rem}
+.cmp-row:last-child{border-bottom:none}
+.cmp-val{font-weight:800;white-space:nowrap}
+.cmp-badge{font-size:.72rem;padding:3px 10px;border-radius:9px;font-weight:700}
+.cmp-badge.good{background:rgba(34,197,94,.2);color:#a7f3c9;border:1px solid rgba(34,197,94,.4)}
+.cmp-badge.bad{background:rgba(239,68,68,.2);color:#ffb3b3;border:1px solid rgba(239,68,68,.4)}
+.cmp-badge.neutral{background:rgba(255,255,255,.08);color:var(--muted);border:1px solid rgba(255,255,255,.15)}
+.prog-score{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.3);font-size:.86rem;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fc-big{font-size:1.4rem;font-weight:900;color:#fff;text-shadow:0 0 12px rgba(124,92,255,.6);margin:6px 0}
+.fc-bar{height:10px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0;position:relative}
+.fc-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#7c5cff,#00e5c3);transition:width .6s}
+.fc-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 0;color:var(--muted);font-size:.8rem}
+.fc-row b{color:var(--text);font-weight:700}
+.ws-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+.ws-row:last-child{border-bottom:none}
+.ws-ic{font-size:1.2rem;flex:none}
+.ws-name{flex:1;min-width:0;font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ws-bar{flex:none;width:84px;height:7px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}
+.ws-barl{height:100%;border-radius:5px}
+.ws-pct{font-weight:800;color:var(--neon2);font-size:.78rem;flex:none}
+.ws-empty{color:var(--muted);font-size:.85rem;text-align:center;padding:10px 0}
+/* dream impact on expense */
+.exp-dream{font-size:.72rem;margin-top:4px;display:flex;align-items:center;gap:4px;font-weight:600}
+.exp-dream.away{color:#ff8fab}
+.exp-dream.closer{color:#7dffe9}
+/* personal records */
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rec-item{padding:14px 8px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);text-align:center}
+.rec-ic{font-size:1.5rem}
+.rec-val{font-size:1rem;font-weight:900;margin-top:4px;color:#fff;text-shadow:0 0 10px rgba(255,217,61,.4)}
+.rec-label{font-size:.7rem;color:var(--muted);margin-top:3px;line-height:1.4}
 </style>
 <style>@font-face{font-family:'Vazirmatn';src:local('Vazirmatn');}</style><script>window.__PREVIEW__=true;</script></head>
 <body>
@@ -374,7 +423,7 @@ details.guide[open] summary::after{content:'▴'}
 
   <main>
     <!-- ===== تب ۱: ثبت خرج ===== -->
-    <section id="tab-add" class="tab active">
+    <section id="tab-add" class="tab">
       <div class="glass wish-announce" id="wish-announce">
         <div class="wa-glow"></div>
         <div class="wa-title">🎯 آرزوها</div>
@@ -494,18 +543,70 @@ details.guide[open] summary::after{content:'▴'}
       <div id="wish-empty" class="empty">هنوز آرزویی ثبت نشده! اولین آرزوت رو اضافه کن 🚀</div>
     </section>
 
-    <!-- ===== تب ۴: آمار ===== -->
-    <section id="tab-stats" class="tab">
-      <h2 class="sec-title">📊 آمار</h2>
+    <!-- ===== تب: داشبورد ===== -->
+    <section id="tab-stats" class="tab active">
+      <h2 class="sec-title">📊 داشبورد</h2>
       <div class="glass alert-card" id="unusual-alert" style="display:none">
         <div id="unusual-alert-body"></div>
       </div>
-      <div class="stat-grid">
+
+      <div class="glass card fin-card">
+        <div class="fin-top">
+          <div class="fin-ring" id="fin-ring"><span id="fin-score">۰</span></div>
+          <div class="fin-main">
+            <div class="fin-label">امتیاز مالی شما</div>
+            <div class="fin-status" id="fin-status">متوسط</div>
+            <div class="fin-bar"><div class="fin-fill" id="fin-fill" style="width:0%"></div></div>
+            <div class="fin-meta" id="fin-meta">بر اساس نرخ پس‌انداز، روند خرج، پیشرفت رویاها و زنجیره ثبت</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass card suggest-card">
+        <div class="suggest-label">✨ پیشنهاد هوشمند امروز</div>
+        <div class="suggest-text" id="suggest-text">—</div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="glass stat-card"><div class="stat-label">موجودی کل</div><div class="stat-val neon" id="dash-balance">۰</div><div class="sum-sub">تومان</div></div>
+        <div class="glass stat-card"><div class="stat-label">درآمد ماه</div><div class="stat-val neon2" id="dash-income">۰</div><div class="sum-sub">تومان</div></div>
+        <div class="glass stat-card"><div class="stat-label">هزینه ماه</div><div class="stat-val" id="dash-expense">۰</div><div class="sum-sub">تومان</div></div>
+        <div class="glass stat-card"><div class="stat-label">پس‌انداز ماه</div><div class="stat-val" id="dash-savings">۰</div><div class="sum-sub">تومان</div></div>
+      </div>
+
+      <div class="dash-mini">
         <div class="glass stat-card"><div class="stat-label">خرج امروز</div><div class="stat-val neon2" id="st-today">۰</div><div class="sum-sub">تومان</div></div>
         <div class="glass stat-card"><div class="stat-label">خرج این هفته</div><div class="stat-val neon" id="st-week">۰</div><div class="sum-sub">تومان</div></div>
-        <div class="glass stat-card"><div class="stat-label">خرج این ماه</div><div class="stat-val neon2" id="st-month">۰</div><div class="sum-sub">تومان</div></div>
-        <div class="glass stat-card"><div class="stat-label">کل خرج‌ها</div><div class="stat-val neon" id="st-all">۰</div><div class="sum-sub">تومان</div></div>
       </div>
+
+      <div class="glass card">
+        <div class="form-title">📅 مقایسه با ماه قبل</div>
+        <div id="cmp-body"></div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">🔮 پیش‌بینی پایان ماه</div>
+        <div id="fc-body"></div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">🎯 وضعیت رویاها</div>
+        <div id="ws-body"></div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">💰 ثبت درآمد / واریز</div>
+        <p class="hint" style="margin:0 0 8px">درآمدهات رو ثبت کن تا موجودی، پس‌انداز ماه و امتیاز مالی‌ت دقیق محاسبه بشه.</p>
+        <label>منبع درآمد</label>
+        <input type="text" id="inc-name" placeholder="مثلاً: حقوق، پروژه، هدیه">
+        <label>مبلغ (تومان)</label>
+        <input type="text" id="inc-amount" inputmode="numeric" placeholder="مثلاً: ۱۵۰۰۰۰۰۰">
+        <label>تاریخ (شمسی — پیش‌فرض: امروز)</label>
+        <div class="date-wrap"><input type="text" id="inc-date" class="date-input" readonly placeholder="انتخاب تاریخ شمسی"><span class="date-caret">📅</span></div>
+        <button class="btn-save" id="inc-save" style="margin-top:14px">💰 ثبت درآمد</button>
+        <div id="inc-list" style="margin-top:14px"></div>
+      </div>
+
       <div class="glass card">
         <div class="form-title">📈 هزینه بر اساس دسته‌بندی</div>
         <div id="cat-chart"></div>
@@ -537,6 +638,11 @@ details.guide[open] summary::after{content:'▴'}
       <div class="glass card motiv-card">
         <div class="motiv-label">💬 انگیزه امروز</div>
         <div class="motiv" id="motiv">—</div>
+      </div>
+
+      <div class="glass card">
+        <div class="form-title">🏆 رکوردهای شخصی</div>
+        <div class="rec-grid" id="rec-grid"></div>
       </div>
 
       <div class="glass card">
@@ -663,15 +769,15 @@ details.guide[open] summary::after{content:'▴'}
         <button class="btn-danger" id="reset-btn">پاک کردن همه داده‌ها</button>
       </div>
 
-      <div class="footer">رویاچین — نسخه ۱.۱ • داده‌ها روی همین دستگاه (LocalStorage) و قابل همگام‌سازی ابری</div>
+      <div class="footer">رویاچین — نسخه ۱.۲ • داده‌ها روی همین دستگاه (LocalStorage) و قابل همگام‌سازی ابری</div>
     </section>
   </main>
 
   <nav class="glass nav" id="nav">
-    <button class="nav-btn active" data-tab="add"><span class="nav-ic">➕</span><span>ثبت</span></button>
+    <button class="nav-btn active" data-tab="stats"><span class="nav-ic">📊</span><span>داشبورد</span></button>
+    <button class="nav-btn" data-tab="add"><span class="nav-ic">➕</span><span>ثبت</span></button>
     <button class="nav-btn" data-tab="list"><span class="nav-ic">📋</span><span>لیست</span></button>
     <button class="nav-btn" data-tab="wish"><span class="nav-ic">🎯</span><span>آرزوها</span></button>
-    <button class="nav-btn" data-tab="stats"><span class="nav-ic">📊</span><span>آمار</span></button>
     <button class="nav-btn" data-tab="game" id="nav-game"><span class="nav-ic">🎮</span><span>انگیزه</span></button>
     <button class="nav-btn" data-tab="settings"><span class="nav-ic">⚙️</span><span>تنظیمات</span></button>
   </nav>
@@ -946,13 +1052,14 @@ function toast(msg){
 }
 
 /* ---------- storage ---------- */
-var K_EXP='kwp_expenses', K_WISH='kwp_wishes', K_SET='kwp_settings', K_CARDS='kwp_cards', K_REM='kwp_reminders', K_GAME='kwp_game';
+var K_EXP='kwp_expenses', K_WISH='kwp_wishes', K_SET='kwp_settings', K_CARDS='kwp_cards', K_REM='kwp_reminders', K_GAME='kwp_game', K_INC='kwp_incomes';
 function load(k,d){ try{ var x=localStorage.getItem(k); return x?JSON.parse(x):d; }catch(e){ return d; } }
 function save(k,val){ try{ localStorage.setItem(k, JSON.stringify(val)); }catch(e){} }
 var expenses = load(K_EXP, []);
 var wishes = load(K_WISH, []);
 var settings = load(K_SET, {});
 var reminders = load(K_REM, []);
+var incomes = load(K_INC, []);
 var CARD_COLORS=['#7c5cff','#00e5c3','#ff6b6b','#ffd93d','#4ecdc4','#ff8fab','#c084fc','#6bcbff','#22c55e','#eab308'];
 function defaultCards(){ return [{id:'c_'+Date.now(), name:'کارت اصلی', color:CARD_COLORS[0]}, {id:'c_'+(Date.now()+1), name:'نقدی', color:CARD_COLORS[1]}]; }
 var cards = load(K_CARDS, null);
@@ -963,14 +1070,16 @@ function genCardId(){ return 'c_'+Date.now()+'_'+Math.floor(Math.random()*9999);
 var DEFAULTS={doubleTap:true, shake:true, vibration:true, clipboardSms:true, webotp:false, autoOpenSms:true, notify:false, notifyInterval:60, sync:false, syncRoom:'', lastSync:0, autoRegisterSms:false, notifyPayment:true, notifyGoal:true, notifyUnusual:true, notifyBillDue:true, monthlySaving:500000, game:true};
 Object.keys(DEFAULTS).forEach(function(k){ if(settings[k]===undefined) settings[k]=DEFAULTS[k]; });
 function saveReminders(){ save(K_REM, reminders); }
-function defaultGame(){ return {xp:0, achievements:{}, challenges:{}, streak:{lastKey:'',count:0}, lastMotivationDay:0, m:Date.now()}; }
+function saveIncomes(){ save(K_INC, incomes); }
+function defaultGame(){ return {xp:0, achievements:{}, challenges:{}, streak:{lastKey:'',count:0}, records:{}, lastMotivationDay:0, m:Date.now()}; }
 var game = load(K_GAME, null);
 if(!game || typeof game!=='object'){ game=defaultGame(); }
 if(!game.achievements) game.achievements={};
 if(!game.challenges) game.challenges={};
 if(!game.streak) game.streak={lastKey:'',count:0};
+if(!game.records) game.records={};
 function saveGame(){ save(K_GAME, game); }
-function persist(){ save(K_EXP, expenses); save(K_WISH, wishes); save(K_SET, settings); saveReminders(); saveGame(); }
+function persist(){ save(K_EXP, expenses); save(K_WISH, wishes); save(K_SET, settings); saveReminders(); saveIncomes(); saveGame(); }
 
 /* ---------- categories ---------- */
 var CATS=[
@@ -1166,16 +1275,25 @@ function fillFromSms(t){
 function autoRegisterSms(t){
   var r=parseSms(t);
   if(!r || !r.amount){ toast('⚠️ مبلغی در پیامک پیدا نشد'); return false; }
-  if(r.type==='income'){ toast('ℹ️ این پیامک واریز است — ثبت نشد'); return false; }
+  if(r.type==='income'){
+    var inc={id:'i_'+Date.now()+'_'+Math.floor(Math.random()*9999), name:r.name||'واریز بانکی', amount:r.amount, ts:Date.now(), m:Date.now(), note:'از پیامک'};
+    incomes.push(inc); persist(); scheduleSync(); renderAll(); updateRecords();
+    vib(100); toast('💰 واریز از پیامک ثبت شد: '+fmt(r.amount)+' تومان');
+    $('#sms-input').value='';
+    return true;
+  }
   if(!currentCard && cards.length) currentCard=cards[0].id;
   var name=r.name||'تراکنش بانکی';
   var cat=guessCatFromSms(t);
   var newExp={id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:r.amount, cat:cat, cardId:currentCard, note:'از پیامک: '+String(t).replace(/\s+/g,' ').substring(0,60), ts:Date.now(), m:Date.now()};
   expenses.push(newExp);
   persist(); scheduleSync(); renderAll();
-  onExpenseAdded(newExp);
+  var res=onExpenseAdded(newExp);
   vib(120);
-  toast('⚡ تراکنش از پیامک ثبت شد: '+fmt(r.amount)+' تومان');
+  var msg='⚡ تراکنش از پیامک ثبت شد: '+fmt(r.amount)+' تومان';
+  if(res.unusual) msg='⚠️ خرج غیرعادی: '+fmt(r.amount)+' ت (میانگین دسته '+fmt(res.unusual.avg)+')';
+  else if(res.dream) msg+=' • 🎯 '+fmt(r.amount)+' از «'+res.dream.wishName+'» فاصله';
+  toast(msg);
   $('#sms-input').value='';
   return true;
 }
@@ -1290,9 +1408,12 @@ function submitExpense(){
   persist();
   scheduleSync();
   renderAll();
-  onExpenseAdded(newExp);
+  var res=onExpenseAdded(newExp);
   vib(120);
-  toast('✅ خرج ثبت شد: '+fmt(amount)+' تومان');
+  var msg='✅ خرج ثبت شد: '+fmt(amount)+' تومان';
+  if(res.unusual) msg='⚠️ خرج غیرعادی: '+fmt(amount)+' ت (میانگین دسته '+fmt(res.unusual.avg)+' بود)';
+  else if(res.dream) msg+=' • 🎯 '+fmt(amount)+' ت از «'+res.dream.wishName+'» فاصله گرفتی';
+  toast(msg);
   resetExpenseForm();
   renderCats();
   renderCardChips('card-chips', currentCard);
@@ -1373,6 +1494,7 @@ function renderExpItem(e){
     +'<div class="exp-name">'+esc(e.name)+'</div>'
     +(e.note?'<div class="exp-note">'+esc(e.note)+'</div>':'')
     +'<div class="exp-meta">🗓️ '+faDate(e.ts)+' • '+faTime(e.ts)+'</div>'
+    +(e.dream?'<div class="exp-dream away">🎯 '+fmt(e.dream.amount)+' ت از «'+esc(e.dream.wishName)+'» فاصله</div>':'')
     +'</div>'
     +'<div class="exp-side">'
     +'<div class="exp-amt neon">'+fmt(e.amount)+'</div>'
@@ -1672,43 +1794,110 @@ function statsData(){
 function renderStats(){
   renderUnusualAlert();
   var d=statsData();
+  var totalExp=totalExpense(), totalInc=totalIncome(), balance=totalInc-totalExp;
+  var cur=monthSums(monthKey(Date.now()));
+  // balance grid
+  $('#dash-balance').textContent=fmt(balance);
+  $('#dash-income').textContent=fmt(cur.income);
+  $('#dash-expense').textContent=fmt(cur.expense);
+  var savEl=$('#dash-savings');
+  savEl.textContent=fmt(cur.savings);
+  savEl.style.color = cur.savings>=0 ? '#7dffe9' : '#ff8fab';
+  // mini today/week
   $('#st-today').textContent=fmt(d.sums.today);
   $('#st-week').textContent=fmt(d.sums.week);
-  $('#st-month').textContent=fmt(d.sums.month);
-  $('#st-all').textContent=fmt(d.sums.all);
-  var total=d.sums.all, html='', any=false;
+  // financial score
+  var fs=financialScore();
+  $('#fin-score').textContent=toFaDigits(fs.score);
+  var ring=$('#fin-ring');
+  if(ring){ ring.style.setProperty('--deg', (fs.score/100*360)+'deg'); ring.style.setProperty('--c', fs.color); }
+  $('#fin-status').textContent=fs.label; $('#fin-status').style.color=fs.color;
+  $('#fin-fill').style.width=fs.score+'%';
+  $('#fin-meta').textContent='پس‌انداز '+toFaDigits(fs.parts.rate)+' • روند خرج '+toFaDigits(fs.parts.trend)+' • رویاها '+toFaDigits(fs.parts.goal)+' • زنجیره '+toFaDigits(fs.parts.streak)+' (از ۱۰۰)';
+  // smart suggestion
+  var sg=smartSuggestion();
+  $('#suggest-text').textContent=sg.ic+' '+sg.text;
+  // compare with last month + monthly progress score
+  renderCompare();
+  // forecast
+  renderForecast(cur);
+  // wishes status
+  renderWishesStatus();
+  // category + card charts
+  renderCharts(totalExp);
+  // income list
+  renderIncomeList();
+}
+function renderCompare(){
+  var box=$('#cmp-body'); if(!box) return;
+  var cmp=compareLastMonth(), cur=cmp.cur, prev=cmp.prev;
+  var expDelta = prev.expense>0 ? cur.expense-prev.expense : 0;
+  var expPct = prev.expense>0 ? Math.round(expDelta/prev.expense*100) : 0;
+  var incDelta = cur.income-prev.income;
+  var savDelta = cur.savings-prev.savings;
+  function badge(delta, invert){ var cls = (delta>0?(invert?'bad':'good'):(delta<0?(invert?'good':'bad'):'neutral')); return '<span class="cmp-badge '+cls+'">'+(delta>0?'▲':delta<0?'▼':'■')+' '+fmt(Math.abs(delta))+'</span>'; }
+  var html='';
+  html+='<div class="cmp-row"><span>هزینه این ماه</span><span class="cmp-val">'+fmt(cur.expense)+' ت</span>'+badge(expDelta,true)+'</div>';
+  html+='<div class="cmp-row"><span>هزینه ماه قبل</span><span class="cmp-val">'+fmt(prev.expense)+' ت</span><span class="cmp-badge neutral">'+(prev.expense>0?toFaDigits(expPct)+'٪':'—')+'</span></div>';
+  html+='<div class="cmp-row"><span>درآمد این ماه</span><span class="cmp-val">'+fmt(cur.income)+' ت</span>'+badge(incDelta,false)+'</div>';
+  html+='<div class="cmp-row"><span>پس‌انداز این ماه</span><span class="cmp-val">'+fmt(cur.savings)+' ت</span>'+badge(savDelta,false)+'</div>';
+  var mp=monthlyProgressScore();
+  html+='<div class="prog-score"><span>📈 امتیاز پیشرفت ماهانه</span><span style="color:'+((mp.score>=50)?'#7dffe9':'#ff8fab')+'">'+toFaDigits(mp.score)+' / ۱۰۰ — '+mp.label+'</span></div>';
+  box.innerHTML=html;
+}
+function renderForecast(cur){
+  var box=$('#fc-body'); if(!box) return;
+  var fc=forecastMonthEnd();
+  var pct = fc.dim>0 ? Math.round(fc.elapsed/fc.dim*100) : 0;
+  var html='روز '+toFaDigits(fc.elapsed)+' از '+toFaDigits(fc.dim)+' ماه <span class="cmp-badge neutral">'+toFaDigits(pct)+'٪</span>';
+  html+='<div class="fc-big">~'+fmt(fc.projected)+' ت</div>';
+  html+='<div class="fc-bar"><div class="fc-fill" style="width:'+pct+'%"></div></div>';
+  html+='<div class="fc-row"><span>هزینه تا الان</span><b>'+fmt(fc.curExp)+' ت</b></div>';
+  html+='<div class="fc-row"><span>پیش‌بینی پایان ماه</span><b>~'+fmt(fc.projected)+' ت</b></div>';
+  if(cur.income>0){
+    var rem=fc.remainingIncome;
+    html+='<div class="fc-row"><span>مونده از درآمد (تخمین)</span><b style="color:'+(rem>=0?'#7dffe9':'#ff8fab')+'">'+fmt(rem)+' ت</b></div>';
+  }
+  box.innerHTML=html;
+}
+function renderWishesStatus(){
+  var box=$('#ws-body'); if(!box) return;
+  if(!wishes.length){ box.innerHTML='<div class="ws-empty">هنوز آرزویی ثبت نشده 🎯</div>'; return; }
+  var totalSaved=0, totalTarget=0, done=0;
+  wishes.forEach(function(w){ totalSaved+=Math.min(w.saved||0,w.target||0); totalTarget+=w.target||0; if(w.target>0&&(w.saved||0)>=w.target) done++; });
+  var overall = totalTarget>0?Math.round(totalSaved/totalTarget*100):0;
+  var html='<div class="cmp-row" style="margin-bottom:4px"><span>پیشرفت کلی رویاها</span><span class="cmp-val" style="color:#7dffe9">'+toFaDigits(overall)+'٪</span></div>';
+  html+='<div class="cmp-row" style="margin-bottom:8px"><span>ذخیره‌شده / کل هدف</span><span class="cmp-val">'+fmt(totalSaved)+' / '+fmt(totalTarget)+' ت</span></div>';
+  wishes.slice().sort(function(a,b){ var pa=(a.saved||0)/(a.target||1), pb=(b.saved||0)/(b.target||1); return pb-pa; }).slice(0,4).forEach(function(w){
+    var pct=w.target>0?Math.min(100,Math.round((w.saved||0)/w.target*100)):0;
+    var color= pct>=100?'#ffd93d':pct>70?'#22c55e':pct>=40?'#eab308':'#ef4444';
+    var ic = pct>=100?'🎉':'🎯';
+    html+='<div class="ws-row"><span class="ws-ic">'+ic+'</span><span class="ws-name">'+esc(w.name)+'</span><span class="ws-bar"><span class="ws-barl" style="width:'+pct+'%;background:'+color+';box-shadow:0 0 8px '+color+'88"></span></span><span class="ws-pct">'+toFaDigits(pct)+'٪</span></div>';
+  });
+  if(done>0) html+='<div class="cmp-row" style="margin-top:6px"><span>آرزوهای محقق‌شده</span><span class="cmp-badge good">'+toFaDigits(done)+' از '+toFaDigits(wishes.length)+'</span></div>';
+  box.innerHTML=html;
+}
+function renderCharts(totalExp){
+  var d=statsData();
+  var html='', any=false;
   CATS.forEach(function(c){
     var amt=d.catSums[c.id]||0;
     if(amt<=0) return;
     any=true;
-    var pct=total>0?Math.round(amt/total*100):0;
-    html+='<div class="chart-row">'
-      +'<div class="ch-ic" style="background:'+c.color+'26;color:'+c.color+'">'+c.icon+'</div>'
-      +'<div class="ch-main">'
-      +'<div class="ch-top"><span>'+c.label+'</span><span class="neon">'+fmt(amt)+' تومان • '+toFaDigits(pct)+'٪</span></div>'
-      +'<div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+c.color+','+c.color+'cc);box-shadow:0 0 10px '+c.color+'88"></div></div>'
-      +'</div></div>';
+    var pct=totalExp>0?Math.round(amt/totalExp*100):0;
+    html+='<div class="chart-row"><div class="ch-ic" style="background:'+c.color+'26;color:'+c.color+'">'+c.icon+'</div><div class="ch-main"><div class="ch-top"><span>'+c.label+'</span><span class="neon">'+fmt(amt)+' ت • '+toFaDigits(pct)+'٪</span></div><div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+c.color+','+c.color+'cc);box-shadow:0 0 10px '+c.color+'88"></div></div></div></div>';
   });
   $('#cat-chart').innerHTML= any ? html : '<div class="empty">هنوز داده‌ای برای نمودار نیست 📊</div>';
-  // card chart
-  var cardBox=document.getElementById('card-chart');
+  var cardBox=$('#card-chart');
   if(cardBox){
     var cardSums={}; cards.forEach(function(c){ cardSums[c.id]=0; });
     expenses.forEach(function(e){ if(cardSums[e.cardId]!==undefined) cardSums[e.cardId]+=e.amount; else if(e.cardId) cardSums[e.cardId]=(cardSums[e.cardId]||0)+e.amount; });
-    var chHtml=''; var anyC=false;
+    var chHtml='', anyC=false;
     cards.forEach(function(c){
       var amt=cardSums[c.id]||0; if(amt<=0) return; anyC=true;
-      var pct=total>0?Math.round(amt/total*100):0;
-      chHtml+='<div class="chart-row">'
-        +'<div class="ch-ic" style="background:'+c.color+'26;color:'+c.color+'">💳</div>'
-        +'<div class="ch-main">'
-        +'<div class="ch-top"><span>'+esc(c.name)+'</span><span class="neon">'+fmt(amt)+' تومان • '+toFaDigits(pct)+'٪</span></div>'
-        +'<div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+c.color+','+c.color+'cc);box-shadow:0 0 10px '+c.color+'88"></div></div>'
-        +'</div></div>';
+      var pct=totalExp>0?Math.round(amt/totalExp*100):0;
+      chHtml+='<div class="chart-row"><div class="ch-ic" style="background:'+c.color+'26;color:'+c.color+'">💳</div><div class="ch-main"><div class="ch-top"><span>'+esc(c.name)+'</span><span class="neon">'+fmt(amt)+' ت • '+toFaDigits(pct)+'٪</span></div><div class="ch-bar"><div class="ch-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+c.color+','+c.color+'cc);box-shadow:0 0 10px '+c.color+'88"></div></div></div></div>';
     });
-    // include unknown card expenses
-    var unk=0; expenses.forEach(function(e){ if(!getCard(e.cardId)) unk+=e.amount; });
-    // unk already counted? ignore
     cardBox.innerHTML= anyC ? chHtml : '<div class="empty" style="padding:12px">هنوز خرجی برای کارت‌ها نیست 💳</div>';
   }
 }
@@ -1837,6 +2026,7 @@ function localDoc(){
   wishes.forEach(function(w){ items['w:'+w.id]={t:'w', id:w.id, m:itemM(w), d:w}; });
   cards.forEach(function(c){ items['c:'+c.id]={t:'c', id:c.id, m:c.m||c.ts||0, d:c}; });
   reminders.forEach(function(r){ items['r:'+r.id]={t:'r', id:r.id, m:r.m||r.ts||0, d:r}; });
+  incomes.forEach(function(i){ items['i:'+i.id]={t:'i', id:i.id, m:itemM(i), d:i}; });
   items['g:state']={t:'g', id:'state', m:game.m||0, d:game};
   Object.keys(tombs).forEach(function(k){
     var cur=items[k];
@@ -1895,6 +2085,21 @@ function applyRemote(doc){
         if(!rf){ reminders.push(r.d); changed=true; }
       }
       if(changed) saveReminders();
+      return;
+    }
+    if(r.t==='i'){
+      if(r.del){
+        for(var ii=0;ii<incomes.length;ii++){
+          if(incomes[ii].id===r.id && (incomes[ii].m||0)<=r.m){ incomes.splice(ii,1); tombs[k]=Math.max(tombs[k]||0,r.m); changed=true; break; }
+        }
+      } else {
+        var ifound=false;
+        for(var ij=0;ij<incomes.length;ij++){
+          if(incomes[ij].id===r.id){ ifound=true; if((incomes[ij].m||0)<(r.m||0)){ incomes[ij]=r.d; changed=true; } break; }
+        }
+        if(!ifound){ incomes.push(r.d); changed=true; }
+      }
+      if(changed) saveIncomes();
       return;
     }
     if(r.t==='g'){
@@ -2032,15 +2237,15 @@ $('#reset-btn').addEventListener('click', function(){
     return;
   }
   clearInterval(resetTimer); resetArmed=false;
-  expenses=[]; wishes=[]; reminders=[]; game=defaultGame();
-  Object.keys(tombs).forEach(function(k){ if(k.charAt(0)==='r'||k.charAt(0)==='g') delete tombs[k]; });
+  expenses=[]; wishes=[]; reminders=[]; incomes=[]; game=defaultGame();
+  Object.keys(tombs).forEach(function(k){ if(k.charAt(0)==='r'||k.charAt(0)==='g'||k.charAt(0)==='i') delete tombs[k]; });
   settings=load(K_SET,{});
   Object.keys(DEFAULTS).forEach(function(k){ if(settings[k]===undefined) settings[k]=DEFAULTS[k]; });
   persist(); saveTombs();
   var btn=$('#reset-btn');
   btn.classList.remove('armed');
   btn.textContent='پاک کردن همه داده‌ها';
-  renderAll(); renderSettings(); renderRemindersManage(); renderRemindersBanner(); applyGameVisibility(); initNotify();
+  renderAll(); renderSettings(); renderRemindersManage(); renderRemindersBanner(); renderIncomeList(); applyGameVisibility(); initNotify();
   toast('🗑️ همه داده‌ها پاک شد');
   vib(80);
 });
@@ -2201,18 +2406,23 @@ function onExpenseAdded(e){
   addXp(10);
   bumpStreak();
   checkAchievements();
-  if(settings.notifyPayment) notify('💸 پرداخت ثبت شد', fmt(e.amount)+' تومان — '+e.name, 'kwp-pay');
+  var w=activeWish();
+  var dream=null;
+  if(w){ e.dream={wishName:w.name, amount:e.amount}; dream=e.dream; persist(); renderList(); }
   var u=detectUnusual(e);
   if(u){
-    toast('⚠️ خرج غیرعادی: '+fmt(e.amount)+' تومان (میانگین این دسته '+fmt(u.avg)+' بود)');
     if(settings.notifyUnusual) notify('⚠️ خرج غیرعادی', e.name+': '+fmt(e.amount)+' تومان — حدود '+toFaDigits(Math.round(u.factor))+' برابر میانگین دسته', 'kwp-unusual');
     vib([80,40,80]);
     renderUnusualAlert();
   }
+  if(settings.notifyPayment) notify('💸 پرداخت ثبت شد', fmt(e.amount)+' تومان — '+e.name, 'kwp-pay');
+  updateRecords();
+  return {unusual:u, dream:dream};
 }
 function onWishDeposit(w, amt){
   addXp(25);
   checkAchievements();
+  updateRecords();
   if(settings.notifyPayment) notify('💰 واریز به آرزو', fmt(amt)+' تومان به «'+w.name+'» واریز شد', 'kwp-dep');
   if(w.target>0){
     var pct=Math.min(100,Math.round((w.saved||0)/w.target*100));
@@ -2465,8 +2675,13 @@ $('#inv-save').addEventListener('click', function(){
   if(!currentCard && cards.length) currentCard=cards[0].id;
   var expTs=jalaliStrToTs($('#exp-date').value)||Date.now();
   var newExp={id:Date.now()+''+Math.floor(Math.random()*9999), name:name, amount:amt, cat:currentCat, cardId:currentCard, note:v($('#inv-note')).trim()||'فاکتور اسکن‌شده', ts:expTs, m:Date.now()};
-  expenses.push(newExp); persist(); scheduleSync(); renderAll(); onExpenseAdded(newExp);
-  vib(120); toast('✅ از فاکتور خرج ثبت شد: '+fmt(amt)+' تومان');
+  expenses.push(newExp); persist(); scheduleSync(); renderAll();
+  var res=onExpenseAdded(newExp);
+  vib(120);
+  var msg='✅ از فاکتور خرج ثبت شد: '+fmt(amt)+' تومان';
+  if(res.unusual) msg='⚠️ خرج غیرعادی از فاکتور: '+fmt(amt)+' ت';
+  else if(res.dream) msg+=' • 🎯 '+fmt(amt)+' از «'+res.dream.wishName+'» فاصله';
+  toast(msg);
   $('#invoice-preview').innerHTML=''; $('#invoice-preview').style.display='none';
   $('#invoice-ocr').style.display='none'; $('#invoice-result').style.display='none';
   $('#invoice-file').value='';
@@ -2565,8 +2780,7 @@ var MOTIVATIONS=[
 ];
 function showMotivation(){
   var box=$('#motiv'); if(!box) return;
-  var doy=Math.floor(Date.now()/86400000);
-  box.textContent=MOTIVATIONS[doy % MOTIVATIONS.length];
+  box.textContent=contextMotivation();
 }
 function maybeDailyMotivation(){
   var doy=Math.floor(Date.now()/86400000);
@@ -2601,6 +2815,7 @@ function renderGame(){
   var sk=$('#game-streak'); if(sk) sk.textContent=toFaDigits((game.streak&&game.streak.count)||0);
   renderAchievements();
   renderChallenges();
+  renderRecords();
   showMotivation();
 }
 function applyGameVisibility(){
@@ -2609,6 +2824,157 @@ function applyGameVisibility(){
   if(nav) nav.style.display = show ? '' : 'none';
   if(tab) tab.style.display = show ? '' : 'none';
 }
+
+/* ---------- finance / dashboard helpers ---------- */
+function monthKey(ts){ var p=faDateParts(ts); return p.y+'/'+p.m; }
+function prevMonthKey(key){ var p=String(key).split('/'); var jy=Number(p[0]), jm=Number(p[1])-1; if(jm<1){jm=12;jy--;} return jy+'/'+jm; }
+function monthBounds(key){ var p=String(key).split('/'); var jy=Number(p[0]), jm=Number(p[1]); var start=jalaaliToTs(jy,jm,1); var dim=_jalDaysInMonth(jy,jm); var end=jalaaliToTs(jy,jm,dim)+86400000-1; return {start:start,end:end,jy:jy,jm:jm,dim:dim}; }
+function monthSums(key){
+  var b=monthBounds(key), exp=0, inc=0;
+  expenses.forEach(function(e){ if(e.ts>=b.start && e.ts<=b.end) exp+=e.amount; });
+  incomes.forEach(function(i){ if(i.ts>=b.start && i.ts<=b.end) inc+=i.amount; });
+  return {expense:exp, income:inc, savings:inc-exp};
+}
+function totalIncome(){ var t=0; incomes.forEach(function(i){ t+=i.amount; }); return t; }
+function totalExpense(){ var t=0; expenses.forEach(function(e){ t+=e.amount; }); return t; }
+function dailyAvg30(){
+  var now=Date.now(), start=now-30*86400000, sum=0;
+  expenses.forEach(function(e){ if(e.ts>=start) sum+=e.amount; });
+  return sum/30;
+}
+function todayExpenses(){
+  var t=faDateParts(Date.now()), key=t.y+'/'+t.m+'/'+t.d, sum=0;
+  expenses.forEach(function(e){ var p=faDateParts(e.ts); if((p.y+'/'+p.m+'/'+p.d)===key) sum+=e.amount; });
+  return sum;
+}
+function activeWish(){
+  var cand=wishes.filter(function(w){ return w.target>0 && (w.saved||0)<w.target; });
+  if(!cand.length) return wishes[0]||null;
+  cand.sort(function(a,b){ var pa=(a.saved||0)/a.target, pb=(b.saved||0)/b.target; return pb-pa; });
+  return cand[0];
+}
+function financialScore(){
+  var cur=monthSums(monthKey(Date.now())), inc=cur.income, sav=cur.savings;
+  var p1 = inc>0 ? Math.min(40, Math.max(0, sav/inc)*40/0.3) : (sav>0?20:0);
+  var prev=monthSums(prevMonthKey(monthKey(Date.now()))), p2=12;
+  if(prev.expense>0){ var delta=(prev.expense-cur.expense)/prev.expense; p2=Math.max(0,Math.min(25, (delta+0.2)/1.2*25)); }
+  var gp=0; if(wishes.length){ var s=0; wishes.forEach(function(w){ s += w.target>0?Math.min(1,(w.saved||0)/w.target):0; }); gp=s/wishes.length; }
+  var p3=Math.min(20, gp*20);
+  var st=(game.streak&&game.streak.count)||0, p4=Math.min(15, st/7*15);
+  var total=Math.round(p1+p2+p3+p4);
+  var label = total>=85?'عالی':total>=65?'خوب':total>=40?'متوسط':'نیاز به تلاش';
+  var color = total>=85?'#22c55e':total>=65?'#00e5c3':total>=40?'#eab308':'#ef4444';
+  return {score:Math.max(0,Math.min(100,total)), label:label, color:color, sav:sav, inc:inc, exp:cur.expense, parts:{rate:Math.round(p1),trend:Math.round(p2),goal:Math.round(p3),streak:Math.round(p4)}};
+}
+function forecastMonthEnd(){
+  var key=monthKey(Date.now()), b=monthBounds(key), cur=monthSums(key);
+  var elapsed=tsToJalaali(Date.now()).jd;
+  var projected = elapsed>0 ? cur.expense/elapsed*b.dim : cur.expense;
+  return {projected:Math.round(projected), curExp:cur.expense, curInc:cur.income, dim:b.dim, elapsed:elapsed, remainingIncome: cur.income-projected};
+}
+function compareLastMonth(){
+  return {cur:monthSums(monthKey(Date.now())), prev:monthSums(prevMonthKey(monthKey(Date.now())))};
+}
+function monthlyProgressScore(){
+  var cmp=compareLastMonth(), cur=cmp.cur, prev=cmp.prev, score=50, parts=[];
+  if(prev.expense>0){ var d=(prev.expense-cur.expense)/prev.expense; score += Math.max(-25,Math.min(25, d*25)); parts.push('روند خرج'); }
+  if(cur.income>0){ var r=cur.savings/cur.income; score += Math.max(-15,Math.min(15, (r-0.1)*30)); parts.push('نرخ پس‌انداز'); }
+  if(prev.savings>=0 && cur.savings>prev.savings) { score+=10; parts.push('افزایش پس‌انداز'); }
+  else if(prev.savings>cur.savings){ score-=10; }
+  score=Math.max(0,Math.min(100,Math.round(score)));
+  var label = score>=70?'پیشرفت خوب':score>=50?'ثابت':score>=30?'کمی افت':'نیاز به توجه';
+  return {score:score, label:label, parts:parts};
+}
+function smartSuggestion(){
+  var now=Date.now();
+  var due=reminders.filter(function(r){ return !r.paid && r.dueTs && r.dueTs<now+3*86400000; });
+  if(due.length){ var r=due.sort(function(a,b){return a.dueTs-b.dueTs;})[0]; return {ic:'⏰', text:'یادآور «'+r.title+'» سررسیده‌ست'+(r.amount?' ('+fmt(r.amount)+' ت)':'')+' — پرداختش رو ثبت کن.'}; }
+  if(incomes.length===0) return {ic:'💰', text:'هنوز درآمدی ثبت نکردی — درآمد این ماهت رو وارد کن تا پس‌انداز و امتیاز مالی‌ت محاسبه بشه.'};
+  var cur=monthSums(monthKey(now));
+  if(cur.income>0 && cur.savings<0) return {ic:'⚠️', text:'این ماه بیشتر از درآمدت خرج کردی! یه بررسی روی خرج‌های غیرضروری داشته باش.'};
+  var ta=todayExpenses(), avg=dailyAvg30();
+  if(avg>0 && ta>avg*1.5) return {ic:'📈', text:'امروز '+fmt(Math.round(ta-avg))+' ت بیشتر از میانگین خرج کردی — بقیش رو کنترل کن.'};
+  if(avg>0 && ta>0 && ta<avg*0.5) return {ic:'🎯', text:'آفرین! امروز '+fmt(Math.round(avg-ta))+' ت کمتر از میانگین خرج کردی — به رویاهات نزدیک‌تر شدی.'};
+  var w=activeWish();
+  if(w && w.target>0){ var left=w.target-(w.saved||0); if(left>0 && (w.saved||0)/w.target>=0.6) return {ic:'🔥', text:'فقط '+fmt(left)+' ت تا آرزوی «'+w.name+'» — یه واریز کوچیک امروز انجام بده.'}; }
+  var cmp=compareLastMonth();
+  if(cmp.prev.expense>0 && cmp.cur.expense<cmp.prev.expense*0.9) return {ic:'📉', text:'خرج این ماه '+toFaDigits(Math.round((1-cmp.cur.expense/cmp.prev.expense)*100))+'٪ کمتر از ماه قبل — عالیه! ادامه بده.'};
+  if(cur.income>0 && cur.savings>0 && cur.savings/cur.income<0.1) return {ic:'🐷', text:'پس‌انداز این ماه کمه ('+toFaDigits(Math.round(cur.savings/cur.income*100))+'٪) — یه هدف پس‌انداز کوچیک بذار.'};
+  if(!wishes.length) return {ic:'🎯', text:'هنوز آرزویی ثبت نکردی — اولین آرزوت رو اضافه کن تا انگیزه بگیری.'};
+  return {ic:'✨', text:'همه‌چیز خوب پیش می‌ره. امروز رو با ثبت دقیق خرج‌هات کامل کن.'};
+}
+function contextMotivation(){
+  var fs=financialScore(), cmp=compareLastMonth(), w=activeWish();
+  if(expenses.length===0 && incomes.length===0) return 'خوش اومدی به رویاچین! اولین خرج یا درآمدت رو ثبت کن 🌙';
+  if(incomes.length===0) return 'درآمدهات رو هم ثبت کن تا تصویر مالی‌ت کامل بشه 💰';
+  if(fs.score>=85) return 'وضعیت مالی‌ت عالیه! داری مثل یک حرفه‌ای مدیریت می‌کنی 👑';
+  if(fs.score>=65) return 'خوب داری پیش می‌ری، یک گام دیگه به استادی نزدیکی 🌿';
+  if(fs.score<40 && cmp.prev.expense>0 && cmp.cur.expense>cmp.prev.expense) return 'این ماه بیشتر خرج کردی — یه مرور روی خرج‌ها خوبه ✂️';
+  if(w && w.target>0 && (w.saved||0)/w.target>=0.7){ var left=w.target-(w.saved||0); return 'به آرزوی «'+w.name+'» نزدیکی، فقط '+fmt(left)+' تومان مونده 🔥'; }
+  if(cmp.prev.expense>0 && cmp.cur.expense<cmp.prev.expense) return 'خرج این ماه از ماه قبل کمتره! داری پیشرفت می‌کنی 📉';
+  return MOTIVATIONS[Math.floor(Date.now()/86400000)%MOTIVATIONS.length];
+}
+
+/* ---------- personal records ---------- */
+function updateRecords(){
+  game.records=game.records||{};
+  var byDay={}; expenses.forEach(function(e){ var k=tsToJalaliStr(e.ts); byDay[k]=(byDay[k]||0)+e.amount; });
+  var low=null; Object.keys(byDay).forEach(function(k){ if(byDay[k]>0 && (!low || byDay[k]<low.value)) low={value:byDay[k],key:k}; });
+  if(low && (!game.records.lowDaily || low.value<game.records.lowDaily.value)){ game.records.lowDaily=low; }
+  var months={};
+  expenses.forEach(function(e){ var k=monthKey(e.ts); if(!months[k]) months[k]={exp:0,inc:0}; months[k].exp+=e.amount; });
+  incomes.forEach(function(i){ var k=monthKey(i.ts); if(!months[k]) months[k]={exp:0,inc:0}; months[k].inc+=i.amount; });
+  var bestSav=null; Object.keys(months).forEach(function(k){ var s=months[k].inc-months[k].exp; if(s>0 && (!bestSav||s>bestSav.value)) bestSav={value:s,key:k}; });
+  if(bestSav && (!game.records.bestSavings || bestSav.value>game.records.bestSavings.value)){ game.records.bestSavings=bestSav; }
+  var st=(game.streak&&game.streak.count)||0;
+  game.records.longestStreak=Math.max(game.records.longestStreak||0, st);
+  var fs=financialScore().score;
+  if(!game.records.bestScore || fs>game.records.bestScore.value){ game.records.bestScore={value:fs, date:Date.now()}; }
+  game.m=Date.now(); saveGame();
+}
+function renderRecords(){
+  var box=$('#rec-grid'); if(!box) return;
+  var r=game.records||{};
+  var items=[
+    {ic:'🏆', val:r.lowDaily?fmt(r.lowDaily.value)+' ت':'—', label:'کمترین خرج یک روز'},
+    {ic:'💰', val:r.bestSavings?fmt(r.bestSavings.value)+' ت':'—', label:'بیشترین پس‌انداز ماه'},
+    {ic:'🔥', val:toFaDigits(r.longestStreak||0)+' روز', label:'طولانی‌ترین زنجیره ثبت'},
+    {ic:'⭐', val:r.bestScore?toFaDigits(r.bestScore.value):'—', label:'بهترین امتیاز مالی'}
+  ];
+  box.innerHTML=items.map(function(it){ return '<div class="rec-item"><div class="rec-ic">'+it.ic+'</div><div class="rec-val">'+it.val+'</div><div class="rec-label">'+it.label+'</div></div>'; }).join('');
+}
+
+/* ---------- income entry ---------- */
+function addIncome(){
+  var name=v($('#inc-name')).trim()||'درآمد';
+  var raw=toEnDigits(v($('#inc-amount'))).replace(/[,٬، ]/g,'');
+  var amount=parseFloat(raw);
+  if(!amount||isNaN(amount)||amount<=0){ toast('⚠️ مبلغ درآمد را وارد کن'); $('#inc-amount').focus(); return; }
+  var ts=jalaliStrToTs($('#inc-date').value)||Date.now();
+  var inc={id:'i_'+Date.now()+'_'+Math.floor(Math.random()*9999), name:name, amount:amount, ts:ts, m:Date.now()};
+  incomes.push(inc); persist(); scheduleSync(); renderAll();
+  addXp(8); updateRecords();
+  vib(80); toast('💰 درآمد ثبت شد: '+fmt(amount)+' تومان');
+  $('#inc-name').value=''; $('#inc-amount').value=''; $('#inc-date').value=todayJalaliStr();
+}
+function deleteIncome(id){
+  tombs['i:'+id]=Date.now(); saveTombs();
+  incomes=incomes.filter(function(i){ return i.id!==id; });
+  persist(); scheduleSync(); renderIncomeList(); renderStats();
+  toast('🗑️ درآمد حذف شد');
+}
+function renderIncomeList(){
+  var box=$('#inc-list'); if(!box) return;
+  if(!incomes.length){ box.innerHTML=''; return; }
+  var html=''; incomes.slice().sort(function(a,b){ return b.ts-a.ts; }).slice(0,8).forEach(function(i){
+    html+='<div class="rem-manage-row"><div class="rem-manage-main"><div class="rem-manage-name">'+esc(i.name)+'</div><div class="rem-manage-meta">'+fmt(i.amount)+' تومان • '+faDate(i.ts)+'</div></div><button class="mini danger" data-incdel="'+i.id+'">🗑️</button></div>';
+  });
+  box.innerHTML=html;
+}
+$('#inc-save').addEventListener('click', addIncome);
+$('#inc-amount').addEventListener('keydown', function(e){ if(e.key==='Enter') addIncome(); });
+$('#inc-name').addEventListener('keydown', function(e){ if(e.key==='Enter') addIncome(); });
+$('#inc-list').addEventListener('click', function(e){ var d=e.target.closest('[data-incdel]'); if(d) deleteIncome(d.getAttribute('data-incdel')); });
 
 /* ---------- init ---------- */
 function renderAll(){ renderSummary(); renderList(); renderWishes(); renderWishAnnounce(); renderStats(); renderAllCardChips(); renderRemindersBanner(); renderGame(); }
@@ -2623,6 +2989,7 @@ renderCats();
 renderCardChips('card-chips', currentCard);
 $('#exp-date').value=todayJalaliStr();
 $('#rem-due').value=todayJalaliStr();
+$('#inc-date').value=todayJalaliStr();
 setDefaultExpandedMonths();
 applyGameVisibility();
 renderAll();
@@ -2631,6 +2998,7 @@ updateSyncStatus();
 initNotify();
 startReminderLoop();
 maybeDailyMotivation();
+updateRecords();
 setTimeout(function(){ checkAchievements(); }, 200);
 if(settings.webotp) startOTP();
 if(settings.sync && settings.syncRoom) setTimeout(function(){ doSync(); }, 900);
